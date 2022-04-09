@@ -15,12 +15,11 @@ export const Container = styled.div`
 `;
 
 export const LoginsContainer = styled.div`
-  input[type='text'] {
-    width: 100%;
-    padding: 0.25rem;
-    color: ${({ theme }) => theme.font.primaryBg};
+  > p {
+    margin: 0.75rem 0px;
   }
 `;
+
 export const HomeForm = styled.form`
   .div-checkbox {
     margin-top: 0.5rem;
@@ -39,6 +38,16 @@ export const HomeForm = styled.form`
     color: red;
 
     margin-top: 0.05rem;
+  }
+
+  input[type='text'] {
+    width: 100%;
+    padding: 0.25rem;
+    color: ${({ theme }) => theme.font.primaryBg};
+  }
+  input[type='checkbox'] {
+    transform: scale(1.25);
+    margin-right: 0.5rem;
   }
 
   .div-submit-button {

@@ -58,7 +58,7 @@ const Home: React.FC = () => {
 
   const handleChangeInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     // prevent user to type non-alphabetical values
-    const newValue = e.target.value.replace(/[^A-Za-z]/, '');
+    const newValue = e.target.value.replace(/[^A-Za-z\s]/, '');
     if (newValue !== nameValue) {
       setError({
         name: '',
@@ -94,7 +94,7 @@ const Home: React.FC = () => {
               checked={olderThatEigtheen}
               onChange={toggleCheckBox}
             />
-            <p>Are you older tha 18 years old?</p>
+            <p>Are you older than 18 years old?</p>
           </div>
           <span className="error">{error.age}</span>
           <div className="div-submit-button">
