@@ -20,7 +20,7 @@
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": "off",
-    "import/no-unresolved": "error",
+    "import/no-unresolved": "off", //conflict with CRA absolute import's for this version
     "react/jsx-filename-extension": [
       1,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
@@ -51,11 +51,10 @@
       "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
+      // "project": "./tsconfig.json",
       "typescript": {},
-      "import/resolver": {
-        "node": {
-          "extensions": [".js", ".jsx", ".ts", ".tsx"]
-        }
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     } //Unable to resolve path to module
   }
