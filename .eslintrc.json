@@ -24,6 +24,7 @@
     "react/prop-types": "off", // cant HTML default element props as a Type without breaking this rule
     "react/require-default-props": "off", //same as above
     "import/no-unresolved": "off", //conflict with CRA absolute import's for this version
+    "prefer-regex-literals": "off", //RegexExp cannot have a break line due prettier without disabling this rule
     "react/jsx-filename-extension": [
       1,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
