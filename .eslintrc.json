@@ -20,6 +20,9 @@
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": "off",
+    "react/jsx-props-no-spreading": "off", //to use ...rest on components props
+    "react/prop-types": "off", // cant HTML default element props as a Type without breaking this rule
+    "react/require-default-props": "off", //same as above
     "import/no-unresolved": "off", //conflict with CRA absolute import's for this version
     "react/jsx-filename-extension": [
       1,
