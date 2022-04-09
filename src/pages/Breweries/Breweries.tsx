@@ -1,18 +1,33 @@
 import React from 'react';
-import { WebIcon } from 'assets/icons';
-
+// import { WebIcon } from 'assets/icons';
 import { Link } from 'react-router-dom';
 import { RouteNames } from 'routes/RoutesUtils';
-import { Container } from './styles.Breweries';
+
+import { ArrowBackIcon } from 'assets/icons';
+import BrewerieCard from './components/BrewerieCard/BrewerieCard';
+import { Container, Header, MainContent } from './styles.Breweries';
 
 const Breweries: React.FC = () => (
   <Container>
-    <h1>Breweries Page</h1>
-    <Link to={RouteNames.home}>
-      Go to
-      {RouteNames.home}
-    </Link>
-    <WebIcon />
+    <Header>
+      <Link to={RouteNames.home}>
+        <div className="go-back-div">
+          <ArrowBackIcon /> <span>Go back</span>
+        </div>
+      </Link>
+      <h3>Breweries Page</h3>
+    </Header>
+    <MainContent>
+      <BrewerieCard />
+      <BrewerieCard />
+      <BrewerieCard />
+      <BrewerieCard />
+      <BrewerieCard />
+      <BrewerieCard />
+      <BrewerieCard />
+      <BrewerieCard />
+      {/* <WebIcon /> */}
+    </MainContent>
   </Container>
 );
 
