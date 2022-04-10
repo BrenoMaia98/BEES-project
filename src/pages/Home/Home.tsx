@@ -5,6 +5,7 @@ import { RouteNames } from 'routes/RoutesUtils';
 import Button, { ButtonProps } from 'components/Button/Button';
 
 import { BeeSrcImg } from 'assets/imgs';
+import { useGlobalContext } from 'global/GlobalContext';
 import {
   Container,
   Title,
@@ -26,6 +27,7 @@ const Home: React.FC = () => {
     name: '',
     age: '',
   });
+  const { setUserName } = useGlobalContext();
 
   const checkFullName = () => fullNameRegex.test(nameValue);
 
@@ -45,6 +47,7 @@ const Home: React.FC = () => {
     try {
       event.preventDefault();
       validateForm();
+      setUserName(nameValue);
       navigate(RouteNames.breweries, { replace: true }); // replace prevents the user to logout accidentally
     } catch ({ message }) {
       setError(
@@ -58,7 +61,7 @@ const Home: React.FC = () => {
 
   const handleChangeInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     // prevent user to type non-alphabetical values
-    const newValue = e.target.value.replace(/[^A-Za-z]/, '');
+    const newValue = e.target.value.replace(/[^A-Za-z\s]/, '');
     if (newValue !== nameValue) {
       setError({
         name: '',
@@ -94,7 +97,7 @@ const Home: React.FC = () => {
               checked={olderThatEigtheen}
               onChange={toggleCheckBox}
             />
-            <p>Are you older tha 18 years old?</p>
+            <p>Are you older than 18 years old?</p>
           </div>
           <span className="error">{error.age}</span>
           <div className="div-submit-button">
