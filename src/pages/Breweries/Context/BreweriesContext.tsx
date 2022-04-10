@@ -24,6 +24,7 @@ const contextDefaultValue = {
   getBreweryById: async (_: string | number) => {},
   searchBreweriesByName: async (_: string) => {},
   getSearchSuggestionList: async (_: string) => {},
+  deleteBreweryById: async (_: string | number) => {},
 };
 
 const MyBreweryContext =
@@ -34,6 +35,7 @@ const breweriesReducer = (
   action: BreweriesAction
 ): BreweryStateValue => {
   const { payload, type } = action;
+  console.log({ payload, type });
   switch (type) {
     case 'SET_AUTOCOMPLETE_SUGGESTION':
       return {
@@ -60,6 +62,13 @@ const breweriesReducer = (
         ...state,
         searchString: payload || state.searchString,
       };
+    case 'REMOVE_BREWERY_BY_ID':
+      return {
+        ...state,
+        breweriesList: state.breweriesList.filter(
+          (brewery) => brewery.id !== payload.id
+        ),
+      };
     default:
       return state;
   }
@@ -70,12 +79,14 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(breweriesReducer, defaultValues);
 
   useEffect(() => {
-    service.SearchBreweries(state.searchString).then((resp) => {
-      dispatch({
-        type: BreweryActionType.SET_BREWERIES_LIST,
-        payload: resp.data.map((item) => mapBreweryDetailResponseAPI(item)),
+    if (state.searchString) {
+      service.SearchBreweries(state.searchString).then((resp) => {
+        dispatch({
+          type: BreweryActionType.SET_BREWERIES_LIST,
+          payload: resp.data.map((item) => mapBreweryDetailResponseAPI(item)),
+        });
       });
-    });
+    }
   }, [state.searchString]);
 
   const listBreweries = async () => {
@@ -113,12 +124,11 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
     });
   };
 
-  const onSearchStringChange = async (searchString: string) => {
+  const deleteBreweryById = async (id: string | number) => {
     console.log('Context > onSearchStringChange ');
-    const resp = await service.SearchBreweries(searchString);
     dispatch({
-      type: BreweryActionType.SET_BREWERIES_LIST,
-      payload: resp.data.map((item) => mapBreweryDetailResponseAPI(item)),
+      type: BreweryActionType.REMOVE_BREWERY_BY_ID,
+      payload: { id },
     });
   };
 
@@ -129,6 +139,7 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
       getBreweryById,
       searchBreweriesByName,
       getSearchSuggestionList,
+      deleteBreweryById,
     }),
     [state]
   );

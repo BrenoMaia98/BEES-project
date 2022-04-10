@@ -2,19 +2,21 @@
 import React from 'react';
 import { TrashIcon, IconName, renderIcon } from 'assets/icons';
 
+import { BreweryDetail } from 'services/services/BreweriesService/type.BreweriesService';
+import { useBreweryContext } from 'pages/Breweries/Context/BreweriesContext';
 import { CardContainer, TagDiv } from './styles.BrewerieCard';
 
 const props = {
   id: 299,
   name: 'Almanac Beer Company',
-  brewery_type: 'micro',
+  breweryType: 'micro',
   street: '651B W Tower Ave',
   address_2: null,
   address_3: null,
   city: 'Alameda',
   state: 'California',
   county_province: null,
-  postal_code: '94501-5047',
+  postalCode: '94501-5047',
   country: 'United States',
   longitude: '-122.306283180899',
   latitude: '37.7834497667258',
@@ -39,23 +41,24 @@ const Tag = ({ icon, text, onClick }: TagProps) => {
   );
 };
 
-export default function BrewerieCard() {
-  const {
-    name,
-    street,
-    city,
-    state,
-    country,
-    brewery_type,
-    postal_code,
-    phone,
-  } = props;
+export const BrewerieCard: React.FC<BreweryDetail> = ({
+  id,
+  name,
+  street,
+  city,
+  state,
+  country,
+  breweryType,
+  postalCode,
+  phone,
+}) => {
+  const { deleteBreweryById } = useBreweryContext();
 
   const handleClickOnAddMore = () => {
     console.log('clicked');
   };
   const OnRemoveCard = () => {
-    console.log('clicked remove');
+    deleteBreweryById(id);
   };
 
   return (
@@ -71,8 +74,8 @@ export default function BrewerieCard() {
       </div>
 
       <div className="tagsList">
-        <Tag icon="GraphIcon" text={brewery_type} />
-        <Tag icon="LocationMarkerIcon" text={postal_code} />
+        <Tag icon="GraphIcon" text={breweryType} />
+        <Tag icon="LocationMarkerIcon" text={postalCode} />
         <Tag icon="PhoneIcon" text={phone} />
         <Tag
           icon="PlusOutlineIcon"
@@ -82,4 +85,4 @@ export default function BrewerieCard() {
       </div>
     </CardContainer>
   );
-}
+};

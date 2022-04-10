@@ -16,6 +16,7 @@ export type ContextDefaultValue = {
   getBreweryById: (breweryId: string | number) => Promise<void>;
   searchBreweriesByName: (searchString: string) => Promise<void>;
   getSearchSuggestionList: (searchString: string) => Promise<void>;
+  deleteBreweryById: (breweryId: string | number) => Promise<void>;
 };
 
 export enum BreweryActionType {
@@ -24,6 +25,7 @@ export enum BreweryActionType {
   CONCAT_BREWERIES_LIST = 'CONCAT_BREWERIES_LIST',
   SET_BREWERIES_DETAIL = 'SET_BREWERIES_DETAIL',
   SET_AUTOCOMPLETE_SUGGESTION = 'SET_AUTOCOMPLETE_SUGGESTION',
+  REMOVE_BREWERY_BY_ID = 'REMOVE_BREWERY_BY_ID',
 }
 
 export type BreweriesAction =
@@ -46,4 +48,8 @@ export type BreweriesAction =
   | {
       type: BreweryActionType.SET_AUTOCOMPLETE_SUGGESTION;
       payload: BreweryStateValue['autocompleteSuggestion'];
+    }
+  | {
+      type: BreweryActionType.REMOVE_BREWERY_BY_ID;
+      payload: { id: string | number };
     };
