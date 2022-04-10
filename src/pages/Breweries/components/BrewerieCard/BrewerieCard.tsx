@@ -1,36 +1,11 @@
 /* eslint-disable camelcase */ // @TO-DO remove this line
 import React from 'react';
-import { TrashIcon, IconName, renderIcon } from 'assets/icons';
+import { TrashIcon } from 'assets/icons';
 
 import { BreweryDetail } from 'services/services/BreweriesService/type.BreweriesService';
 import { useBreweryContext } from 'pages/Breweries/Context/BreweriesContext';
-import { CardContainer, TagDiv, RemoveableTagDiv } from './styles.BrewerieCard';
-
-type TagProps = {
-  icon: IconName;
-  text: string;
-  onClick?: () => void;
-};
-
-const InfoTag = ({ icon, text, onClick }: TagProps) => {
-  return (
-    <TagDiv onClick={() => (onClick ? onClick() : undefined)}>
-      <div className={onClick ? 'hover' : ''}>
-        {renderIcon(icon)}
-        <span>{text || 'no info'}</span>
-      </div>
-    </TagDiv>
-  );
-};
-
-const RemoveableTag = ({ text, onClick }: Omit<TagProps, 'icon'>) => {
-  return (
-    <RemoveableTagDiv onClick={() => (onClick ? onClick() : undefined)}>
-      {renderIcon('TrashIcon')}
-      <span>{text || 'no info'}</span>
-    </RemoveableTagDiv>
-  );
-};
+import { CardContainer } from './styles.BrewerieCard';
+import { InfoTag } from './InfoTag';
 
 export const BrewerieCard: React.FC<BreweryDetail> = ({
   id,
@@ -89,15 +64,16 @@ export const BrewerieCard: React.FC<BreweryDetail> = ({
         <InfoTag icon="LocationMarkerIcon" text={postalCode} />
         <InfoTag icon="PhoneIcon" text={formatPhoneNumber(String(phone))} />
         {moreInfo.map((info, index) => (
-          <RemoveableTag
+          <InfoTag
+            type="removeable"
             text={info}
-            onClick={() => handleRemoveInfoByIndex(index)}
+            action={() => handleRemoveInfoByIndex(index)}
           />
         ))}
         <InfoTag
-          icon="PlusOutlineIcon"
+          type="addInfo"
           text="add more"
-          onClick={handleClickOnAddMoreInfo}
+          action={handleClickOnAddMoreInfo}
         />
       </div>
     </CardContainer>
