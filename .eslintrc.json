@@ -25,12 +25,14 @@
     "react/require-default-props": "off", //same as above
     "import/no-unresolved": "off", //conflict with CRA absolute import's for this version
     "prefer-regex-literals": "off", //RegexExp cannot have a break line due prettier without disabling this rule
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
+    "@typescript-eslint/no-use-before-define": ["error"],
     "react/jsx-filename-extension": [
       1,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ],
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": ["error"],
     "import/extensions": [
       "error",
       "ignorePackages",
