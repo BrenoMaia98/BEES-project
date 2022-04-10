@@ -8,21 +8,31 @@ export const CardContainer = styled.div`
   width: 100%;
   padding: 1.5rem;
 
-  border: 0.05rem solid ${({ theme }) => theme.font.color};
+  border: 0.05rem solid ${({ theme }) => theme.font.primaryBg};
   background-color: ${({ theme }) => theme.background2};
-  color: ${({ theme }) => theme.font.primaryBg};
+  /* color: ${({ theme }) => theme.font.primaryBg}; */
+  color: ${({ theme }) => theme.darkTheme && theme.secondary};
 
   .remove-icon {
     position: absolute;
     right: 0.75rem;
     top: 0.75rem;
     cursor: pointer;
-    svg,
+
+    * {
+      fill: ${({ theme }) =>
+        theme.darkTheme ? theme.secondary : theme.font.primaryBg};
+    }
+
     &:hover {
       * {
         fill: red;
       }
     }
+  }
+
+  .card-info {
+    margin: 1.5rem 0px;
   }
 
   .tagsList {
@@ -46,6 +56,10 @@ export const TagDiv = styled.div`
   svg {
     width: 1.15rem;
     height: 1.15rem;
+    * {
+      stroke: ${({ theme }) =>
+        theme.darkTheme ? theme.secondary : theme.font.primaryBg};
+    }
   }
 
   span {

@@ -1,4 +1,5 @@
 export type Palette = {
+  darkTheme: boolean;
   primary: string;
   primaryLight: string;
   primaryDark: string;
@@ -16,6 +17,7 @@ export type GlobalThemeType = { light: Palette; dark: Palette };
 
 const globalTheme: GlobalThemeType = {
   light: {
+    darkTheme: false,
     primary: '#F3EC57',
     primaryLight: '#ffff8a',
     primaryDark: '#bdba1f',
@@ -30,14 +32,15 @@ const globalTheme: GlobalThemeType = {
     },
   },
   dark: {
-    secondary: '#F3EC57',
-    secondaryLight: '#ffff8a',
-    secondaryDark: '#bdba1f',
+    darkTheme: true,
     primary: '#52515C',
     primaryLight: '#7e7d89',
     primaryDark: '#292933',
-    background2: '#000',
-    background: '#00010D',
+    secondary: '#F3EC57',
+    secondaryLight: '#ffff8a',
+    secondaryDark: '#bdba1f',
+    background2: '#27292e',
+    background: '#16171a',
     font: {
       primaryBg: '#fff',
       secondaryBg: '#00010D',

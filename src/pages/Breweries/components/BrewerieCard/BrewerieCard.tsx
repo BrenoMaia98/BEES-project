@@ -61,13 +61,14 @@ export default function BrewerieCard() {
   return (
     <CardContainer>
       <TrashIcon className="remove-icon" onClick={OnRemoveCard} />
-      <b className="card-title">
-        <p>{name}</p>
-      </b>
-      <p>{street}</p>
-      <p>
-        {city},{state} - {country}
-      </p>
+      <h3 className="card-title">{name}</h3>
+      <div className="card-info">
+        <p>
+          {street}
+          <br />
+          {city},{state} - {country}
+        </p>
+      </div>
 
       <div className="tagsList">
         <Tag icon="LocationMarkerIcon" text={brewery_type} />
