@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import { WebIcon } from 'assets/icons';
 
 import { HeaderApp } from 'components/HeaderApp/HeaderApp';
 import BrewerieCard from './components/BrewerieCard/BrewerieCard';
 import { Container, MainContent } from './styles.Breweries';
+import {
+  BreweryContextProvider,
+  useBreweryContext,
+} from './Context/BreweriesContext';
 
-const Breweries: React.FC = () => {
+const BreweriesPage: React.FC = () => {
+  const { listBreweries } = useBreweryContext();
+
+  useEffect(() => {
+    listBreweries();
+  }, []);
+
   return (
     <Container>
       <HeaderApp />
@@ -18,10 +28,14 @@ const Breweries: React.FC = () => {
         <BrewerieCard />
         <BrewerieCard />
         <BrewerieCard />
-        {/* <WebIcon /> */}
       </MainContent>
     </Container>
   );
 };
+const Breweries = () => (
+  <BreweryContextProvider>
+    <BreweriesPage />
+  </BreweryContextProvider>
+);
 
 export default Breweries;
