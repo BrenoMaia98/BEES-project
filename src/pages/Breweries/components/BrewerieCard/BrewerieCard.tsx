@@ -4,27 +4,7 @@ import { TrashIcon, IconName, renderIcon } from 'assets/icons';
 
 import { BreweryDetail } from 'services/services/BreweriesService/type.BreweriesService';
 import { useBreweryContext } from 'pages/Breweries/Context/BreweriesContext';
-import { CardContainer, TagDiv } from './styles.BrewerieCard';
-
-const props = {
-  id: 299,
-  name: 'Almanac Beer Company',
-  breweryType: 'micro',
-  street: '651B W Tower Ave',
-  address_2: null,
-  address_3: null,
-  city: 'Alameda',
-  state: 'California',
-  county_province: null,
-  postalCode: '94501-5047',
-  country: 'United States',
-  longitude: '-122.306283180899',
-  latitude: '37.7834497667258',
-  phone: '4159326531',
-  website_url: 'http://almanacbeer.com',
-  updated_at: '2018-08-23T23:24:11.758Z',
-  created_at: '2018-08-23T23:24:11.758Z',
-};
+import { CardContainer, TagDiv, RemoveableTagDiv } from './styles.BrewerieCard';
 
 type TagProps = {
   icon: IconName;
@@ -32,12 +12,23 @@ type TagProps = {
   onClick?: () => void;
 };
 
-const Tag = ({ icon, text, onClick }: TagProps) => {
+const InfoTag = ({ icon, text, onClick }: TagProps) => {
   return (
     <TagDiv onClick={() => (onClick ? onClick() : undefined)}>
-      {renderIcon(icon)}
-      <span>{text || 'no info'}</span>
+      <div className={onClick ? 'hover' : ''}>
+        {renderIcon(icon)}
+        <span>{text || 'no info'}</span>
+      </div>
     </TagDiv>
+  );
+};
+
+const RemoveableTag = ({ text, onClick }: Omit<TagProps, 'icon'>) => {
+  return (
+    <RemoveableTagDiv onClick={() => (onClick ? onClick() : undefined)}>
+      {renderIcon('TrashIcon')}
+      <span>{text || 'no info'}</span>
+    </RemoveableTagDiv>
   );
 };
 
@@ -46,18 +37,26 @@ export const BrewerieCard: React.FC<BreweryDetail> = ({
   name,
   street,
   city,
-  state,
+  state: BreweryState,
   country,
   breweryType,
   postalCode,
   phone,
+  moreInfo,
 }) => {
-  const { deleteBreweryById } = useBreweryContext();
-  const handleClickOnAddMore = () => {
-    console.log('clicked');
-  };
+  const { deleteBreweryById, addMoreInfo, removeInfoByIndex } =
+    useBreweryContext();
+
   const OnRemoveCard = () => {
     deleteBreweryById(id);
+  };
+
+  const handleClickOnAddMoreInfo = () => {
+    addMoreInfo({ breweryId: id, newInfo: 'New info!' });
+  };
+
+  const handleRemoveInfoByIndex = (index: number) => {
+    removeInfoByIndex({ breweryId: id, infoIndex: index });
   };
 
   const formatPhoneNumber = (phoneNumber: string) => {
@@ -81,18 +80,24 @@ export const BrewerieCard: React.FC<BreweryDetail> = ({
         <p>
           {street}
           <br />
-          {city},{state} - {country}
+          {city},{BreweryState} - {country}
         </p>
       </div>
 
       <div className="tagsList">
-        <Tag icon="GraphIcon" text={breweryType} />
-        <Tag icon="LocationMarkerIcon" text={postalCode} />
-        <Tag icon="PhoneIcon" text={formatPhoneNumber(String(phone))} />
-        <Tag
+        <InfoTag icon="GraphIcon" text={breweryType} />
+        <InfoTag icon="LocationMarkerIcon" text={postalCode} />
+        <InfoTag icon="PhoneIcon" text={formatPhoneNumber(String(phone))} />
+        {moreInfo.map((info, index) => (
+          <RemoveableTag
+            text={info}
+            onClick={() => handleRemoveInfoByIndex(index)}
+          />
+        ))}
+        <InfoTag
           icon="PlusOutlineIcon"
           text="add more"
-          onClick={handleClickOnAddMore}
+          onClick={handleClickOnAddMoreInfo}
         />
       </div>
     </CardContainer>

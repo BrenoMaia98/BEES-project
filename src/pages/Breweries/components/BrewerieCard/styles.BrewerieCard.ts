@@ -65,4 +65,22 @@ export const TagDiv = styled.div`
   span {
     margin-left: 0.5rem;
   }
+
+  .hover {
+    cursor: pointer;
+  }
+`;
+
+export const RemoveableTagDiv = styled(TagDiv)`
+  cursor: pointer;
+  svg {
+    path {
+      stroke: unset !important;
+    }
+  }
+  :hover {
+    * {
+      fill: red;
+    }
+  }
 `;

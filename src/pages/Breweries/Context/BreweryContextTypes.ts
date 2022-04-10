@@ -16,7 +16,12 @@ export type ContextDefaultValue = {
   getBreweryById: (breweryId: string | number) => Promise<void>;
   searchBreweriesByName: (searchString: string) => Promise<void>;
   getSearchSuggestionList: (searchString: string) => Promise<void>;
-  deleteBreweryById: (breweryId: string | number) => Promise<void>;
+  deleteBreweryById: (breweryId: string | number) => void;
+  addMoreInfo: (param: { breweryId: string | number; newInfo: string }) => void;
+  removeInfoByIndex: (param: {
+    breweryId: string | number;
+    infoIndex: number;
+  }) => void;
 };
 
 export enum BreweryActionType {
@@ -26,6 +31,8 @@ export enum BreweryActionType {
   SET_BREWERIES_DETAIL = 'SET_BREWERIES_DETAIL',
   SET_AUTOCOMPLETE_SUGGESTION = 'SET_AUTOCOMPLETE_SUGGESTION',
   REMOVE_BREWERY_BY_ID = 'REMOVE_BREWERY_BY_ID',
+  ADD_MORE_INFO_TO_BREWERY = 'ADD_MORE_INFO_TO_BREWERY',
+  REMOVE_INFO_FROM_BREWERY = 'REMOVE_INFO_FROM_BREWERY',
 }
 
 export type BreweriesAction =
@@ -52,4 +59,12 @@ export type BreweriesAction =
   | {
       type: BreweryActionType.REMOVE_BREWERY_BY_ID;
       payload: { id: string | number };
+    }
+  | {
+      type: BreweryActionType.ADD_MORE_INFO_TO_BREWERY;
+      payload: { breweryId: string | number; newInfo: string };
+    }
+  | {
+      type: BreweryActionType.REMOVE_INFO_FROM_BREWERY;
+      payload: { breweryId: string | number; infoIndex: number };
     };

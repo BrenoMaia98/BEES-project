@@ -60,4 +60,5 @@ export const mapBreweryDetailResponseAPI = ({
   country,
   phone,
   websiteUrl: website_url,
+  moreInfo: [],
 });

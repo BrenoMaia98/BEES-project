@@ -21,10 +21,12 @@ const defaultValues: BreweryStateValue = {
 const contextDefaultValue = {
   state: defaultValues,
   listBreweries: async () => {},
-  getBreweryById: async (_: string | number) => {},
-  searchBreweriesByName: async (_: string) => {},
-  getSearchSuggestionList: async (_: string) => {},
-  deleteBreweryById: async (_: string | number) => {},
+  getBreweryById: async () => {},
+  searchBreweriesByName: async () => {},
+  getSearchSuggestionList: async () => {},
+  deleteBreweryById: () => {},
+  addMoreInfo: () => {},
+  removeInfoByIndex: () => {},
 };
 
 const MyBreweryContext =
@@ -68,6 +70,34 @@ const breweriesReducer = (
         breweriesList: state.breweriesList.filter(
           (brewery) => brewery.id !== payload.id
         ),
+      };
+    case 'ADD_MORE_INFO_TO_BREWERY':
+      return {
+        ...state,
+        breweriesList: state.breweriesList.map((brewery) => {
+          if (brewery.id !== payload.breweryId) {
+            return brewery;
+          }
+          return {
+            ...brewery,
+            moreInfo: [...brewery.moreInfo, payload.newInfo],
+          };
+        }),
+      };
+    case 'REMOVE_INFO_FROM_BREWERY':
+      return {
+        ...state,
+        breweriesList: state.breweriesList.map((brewery) => {
+          if (brewery.id !== payload.breweryId) {
+            return brewery;
+          }
+          const newArray = [...brewery.moreInfo];
+          newArray.splice(payload.infoIndex, 1);
+          return {
+            ...brewery,
+            moreInfo: newArray,
+          };
+        }),
       };
     default:
       return state;
@@ -124,11 +154,38 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
     });
   };
 
-  const deleteBreweryById = async (id: string | number) => {
-    console.log('Context > onSearchStringChange ');
+  const deleteBreweryById = (id: string | number) => {
+    console.log('Context > deleteBreweryById ');
     dispatch({
       type: BreweryActionType.REMOVE_BREWERY_BY_ID,
       payload: { id },
+    });
+  };
+
+  const addMoreInfo = ({
+    breweryId,
+    newInfo,
+  }: {
+    breweryId: string | number;
+    newInfo: string;
+  }) => {
+    console.log('Context > addMoreInfo ');
+    dispatch({
+      type: BreweryActionType.ADD_MORE_INFO_TO_BREWERY,
+      payload: { breweryId, newInfo },
+    });
+  };
+  const removeInfoByIndex = ({
+    breweryId,
+    infoIndex,
+  }: {
+    breweryId: string | number;
+    infoIndex: number;
+  }) => {
+    console.log('Context > removeInfoByIndex ');
+    dispatch({
+      type: BreweryActionType.REMOVE_INFO_FROM_BREWERY,
+      payload: { breweryId, infoIndex },
     });
   };
 
@@ -140,6 +197,8 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
       searchBreweriesByName,
       getSearchSuggestionList,
       deleteBreweryById,
+      addMoreInfo,
+      removeInfoByIndex,
     }),
     [state]
   );
