@@ -36,7 +36,7 @@ const Tag = ({ icon, text, onClick }: TagProps) => {
   return (
     <TagDiv onClick={() => (onClick ? onClick() : undefined)}>
       {renderIcon(icon)}
-      <span>{text}</span>
+      <span>{text || 'no info'}</span>
     </TagDiv>
   );
 };
@@ -53,12 +53,24 @@ export const BrewerieCard: React.FC<BreweryDetail> = ({
   phone,
 }) => {
   const { deleteBreweryById } = useBreweryContext();
-
   const handleClickOnAddMore = () => {
     console.log('clicked');
   };
   const OnRemoveCard = () => {
     deleteBreweryById(id);
+  };
+
+  const formatPhoneNumber = (phoneNumber: string) => {
+    if (phoneNumber.length === 10) {
+      return phoneNumber.replace(
+        /(\d{3})(\d{3})(\d{2})(\d{2})/,
+        '+($1) - $2-$3-$4'
+      );
+    }
+    if (phoneNumber.length === 11) {
+      return phoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+    }
+    return (phoneNumber === 'null' && 'no info') || phoneNumber;
   };
 
   return (
@@ -76,7 +88,7 @@ export const BrewerieCard: React.FC<BreweryDetail> = ({
       <div className="tagsList">
         <Tag icon="GraphIcon" text={breweryType} />
         <Tag icon="LocationMarkerIcon" text={postalCode} />
-        <Tag icon="PhoneIcon" text={phone} />
+        <Tag icon="PhoneIcon" text={formatPhoneNumber(String(phone))} />
         <Tag
           icon="PlusOutlineIcon"
           text="add more"
