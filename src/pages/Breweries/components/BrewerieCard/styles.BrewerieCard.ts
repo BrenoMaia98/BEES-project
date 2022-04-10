@@ -37,7 +37,7 @@ export const CardContainer = styled.div`
 
   .tagsList {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
   }
 `;
@@ -48,8 +48,8 @@ export const TagDiv = styled.div`
 
   /* width: 8rem; */
   padding: 0.25em 0.75rem;
-  margin-top: 1rem;
-
+  margin-top: 0.75em;
+  margin-right: 1.5em;
   border-radius: 2rem;
   background-color: ${({ theme }) => theme.primary};
 

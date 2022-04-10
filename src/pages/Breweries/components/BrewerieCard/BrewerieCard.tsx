@@ -71,9 +71,9 @@ export default function BrewerieCard() {
       </div>
 
       <div className="tagsList">
-        <Tag icon="LocationMarkerIcon" text={brewery_type} />
-        <Tag icon="PhoneIcon" text={postal_code} />
-        <Tag icon="GraphIcon" text={phone} />
+        <Tag icon="GraphIcon" text={brewery_type} />
+        <Tag icon="LocationMarkerIcon" text={postal_code} />
+        <Tag icon="PhoneIcon" text={phone} />
         <Tag
           icon="PlusOutlineIcon"
           text="add more"
