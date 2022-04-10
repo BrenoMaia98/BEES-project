@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useEffect, useState } from 'react';
 import { SwitchDiv } from './styles.Switch';
 
@@ -26,7 +27,8 @@ export const Switch: React.FC<SwitchProps> = ({
 
   return (
     <SwitchDiv className="switch" onClick={toggleCheckBox}>
-      <input type="checkbox" checked={selected} />
+      {/* To remove error on console for a "read-only" input, added empty onChange */}
+      <input type="checkbox" checked={selected} onChange={() => {}} />
       <span className="slider round" />
     </SwitchDiv>
   );
