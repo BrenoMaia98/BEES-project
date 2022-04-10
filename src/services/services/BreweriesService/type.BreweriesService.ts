@@ -42,4 +42,5 @@ export type BreweryDetail = {
   websiteUrl: string;
   // updatedAt: string;
   // createdAt: string;
+  moreInfo: string[];
 };
