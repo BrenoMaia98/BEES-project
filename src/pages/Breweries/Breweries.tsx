@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 // import { WebIcon } from 'assets/icons';
 
 import { HeaderApp } from 'components/HeaderApp/HeaderApp';
-import BrewerieCard from './components/BrewerieCard/BrewerieCard';
 import { Container, MainContent } from './styles.Breweries';
+import { BrewerieCard } from './components/BrewerieCard/BrewerieCard';
 import {
   BreweryContextProvider,
   useBreweryContext,
 } from './Context/BreweriesContext';
 
 const BreweriesPage: React.FC = () => {
-  const { listBreweries } = useBreweryContext();
+  const { listBreweries, state } = useBreweryContext();
 
   useEffect(() => {
     listBreweries();
@@ -20,14 +20,9 @@ const BreweriesPage: React.FC = () => {
     <Container>
       <HeaderApp />
       <MainContent>
-        <BrewerieCard />
-        <BrewerieCard />
-        <BrewerieCard />
-        <BrewerieCard />
-        <BrewerieCard />
-        <BrewerieCard />
-        <BrewerieCard />
-        <BrewerieCard />
+        {state.breweriesList.map((brewery) => {
+          return <BrewerieCard {...brewery} />;
+        })}
       </MainContent>
     </Container>
   );
