@@ -5,6 +5,7 @@ import { RouteNames } from 'routes/RoutesUtils';
 import Button, { ButtonProps } from 'components/Button/Button';
 
 import { BeeSrcImg } from 'assets/imgs';
+import { useGlobalContext } from 'global/GlobalContext';
 import {
   Container,
   Title,
@@ -26,6 +27,7 @@ const Home: React.FC = () => {
     name: '',
     age: '',
   });
+  const { setUserName } = useGlobalContext();
 
   const checkFullName = () => fullNameRegex.test(nameValue);
 
@@ -45,6 +47,7 @@ const Home: React.FC = () => {
     try {
       event.preventDefault();
       validateForm();
+      setUserName(nameValue);
       navigate(RouteNames.breweries, { replace: true }); // replace prevents the user to logout accidentally
     } catch ({ message }) {
       setError(
