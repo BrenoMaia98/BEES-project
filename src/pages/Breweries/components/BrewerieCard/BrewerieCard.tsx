@@ -26,8 +26,8 @@ export const BrewerieCard: React.FC<BreweryDetail> = ({
     deleteBreweryById(id);
   };
 
-  const handleClickOnAddMoreInfo = () => {
-    addMoreInfo({ breweryId: id, newInfo: 'New info!' });
+  const handleClickOnAddMoreInfo = (info: string) => {
+    addMoreInfo({ breweryId: id, newInfo: info });
   };
 
   const handleRemoveInfoByIndex = (index: number) => {
