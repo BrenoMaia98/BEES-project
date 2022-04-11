@@ -21,7 +21,7 @@ const BreweriesPage: React.FC = () => {
       <HeaderApp />
       <MainContent>
         {state.breweriesList.map((brewery) => {
-          return <BrewerieCard {...brewery} />;
+          return <BrewerieCard key={brewery.id} {...brewery} />;
         })}
       </MainContent>
     </Container>
