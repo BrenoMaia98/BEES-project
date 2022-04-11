@@ -26,7 +26,6 @@ type TagProps =
 export const InfoTag = ({ type = 'default', text, action, icon }: TagProps) => {
   const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const [showInput, setShowInput] = useState(false);
-  const [value, setValue] = useState('');
 
   const onClickAddMore = () => {
     if (!showInput) {

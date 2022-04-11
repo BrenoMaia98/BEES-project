@@ -1,11 +1,5 @@
 /* eslint-disable no-useless-escape */
-import React, {
-  ChangeEvent,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { ChangeEvent, RefObject, useEffect, useState } from 'react';
 import { StylesInputText } from './styles.InputText';
 
 export interface InputTextProps

@@ -12,7 +12,7 @@ const defaultValues: MyGlobalContextValue = {
   globalTheme: 'light',
   toggleTheme: () => {},
   userName: '',
-  setUserName: (name: string) => {},
+  setUserName: () => {},
 };
 
 const MyGlobalContext =
