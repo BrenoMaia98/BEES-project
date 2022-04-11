@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { RefObject, useRef, useState } from 'react';
 import { IconName, renderIcon } from 'assets/icons';
+import InputText from 'components/InputText/InputText';
 import { RemoveableTagDiv, TagDiv } from './styles.BrewerieCard';
 
 type TagProps =
@@ -23,19 +24,21 @@ type TagProps =
     };
 
 export const InfoTag = ({ type = 'default', text, action, icon }: TagProps) => {
-  const inputRef = useRef<HTMLInputElement>();
+  const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const [showInput, setShowInput] = useState(false);
+  const [value, setValue] = useState('');
 
   const onClickAddMore = () => {
     if (!showInput) {
       setShowInput((state) => !state);
       setTimeout(() => {
         inputRef.current?.focus();
-      }, 100);
+      }, 500);
     }
   };
 
   const submitInfo = () => {
+    console.log(action, inputRef, inputRef.current);
     if (action && inputRef && inputRef.current) {
       action(inputRef.current.value);
       setShowInput((state) => !state);
@@ -58,14 +61,15 @@ export const InfoTag = ({ type = 'default', text, action, icon }: TagProps) => {
           <div className={action ? 'hover' : ''}>
             {renderIcon('PlusOutlineIcon')}
             {showInput ? (
-              <input
+              <InputText
                 onBlur={submitInfo}
-                onSubmit={(e) => {
+                onSubmit={() => {
                   submitInfo();
                 }}
+                inputRef={inputRef}
                 onKeyDown={handleKeyDown}
                 type="text"
-                ref={inputRef as React.LegacyRef<HTMLInputElement>}
+                autoFocus
                 id="new-info"
               />
             ) : (
@@ -85,7 +89,7 @@ export const InfoTag = ({ type = 'default', text, action, icon }: TagProps) => {
     default:
     case 'default':
       return (
-        <TagDiv onClick={() => (action ? action('') : undefined)}>
+        <TagDiv>
           <div className={action ? 'hover' : ''}>
             {(icon && renderIcon(icon)) || null}
             <span>{text || 'no info'}</span>
