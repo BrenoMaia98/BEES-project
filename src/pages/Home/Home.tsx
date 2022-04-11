@@ -6,6 +6,7 @@ import Button, { ButtonProps } from 'components/Button/Button';
 
 import { BeeSrcImg } from 'assets/imgs';
 import { useGlobalContext } from 'global/GlobalContext';
+import { Switch } from 'components/Switch/Switch';
 import {
   Container,
   Title,
@@ -20,6 +21,7 @@ const fullNameRegex = new RegExp(
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  const { toggleTheme } = useGlobalContext();
 
   const [olderThatEigtheen, setOlderThatEigtheen] = useState(false);
   const [nameValue, setNameValue] = useState('');
@@ -74,9 +76,11 @@ const Home: React.FC = () => {
   const toggleCheckBox = () => {
     setOlderThatEigtheen((value) => !value);
   };
-
   return (
     <Container>
+      <div className="toggle-theme-switch">
+        <Switch onToggle={toggleTheme} />
+      </div>
       <Title>Welcome!</Title>
       <LoginsContainer>
         <p>Please, enter your full name below</p>
