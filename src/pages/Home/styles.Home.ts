@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   flex: 1;
   height: 100vh;
@@ -12,6 +13,12 @@ export const Container = styled.div`
 
   background-color: ${({ theme }) => theme.primary};
   color: ${({ theme }) => theme.font.primaryBg};
+
+  .toggle-theme-switch {
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+  }
 `;
 
 export const LoginsContainer = styled.div`
