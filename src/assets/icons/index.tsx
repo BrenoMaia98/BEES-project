@@ -16,40 +16,37 @@ export type IconName =
   | 'PlusOutlineIcon'
   | 'TrashIcon';
 
-export const renderIcon = (iconName: IconName): JSX.Element | null => {
+type OtherProps = {
+  onClick: () => void;
+  className: string;
+};
+export const renderIcon = (
+  iconName: IconName,
+  otherProps?: OtherProps
+): JSX.Element | null => {
   switch (iconName) {
     case 'WebIcon': {
-      return <WebIcon />;
+      return <WebIcon {...otherProps} />;
     }
     case 'ArrowBackIcon': {
-      return <ArrowBackIcon />;
+      return <ArrowBackIcon {...otherProps} />;
     }
     case 'GraphIcon': {
-      return <GraphIcon />;
+      return <GraphIcon {...otherProps} />;
     }
     case 'LocationMarkerIcon': {
-      return <LocationMarkerIcon />;
+      return <LocationMarkerIcon {...otherProps} />;
     }
     case 'PhoneIcon': {
-      return <PhoneIcon />;
+      return <PhoneIcon {...otherProps} />;
     }
     case 'PlusOutlineIcon': {
-      return <PlusOutlineIcon />;
+      return <PlusOutlineIcon {...otherProps} />;
     }
     case 'TrashIcon': {
-      return <TrashIcon />;
+      return <TrashIcon {...otherProps} />;
     }
     default:
       return null;
   }
-};
-
-export {
-  WebIcon,
-  ArrowBackIcon,
-  GraphIcon,
-  LocationMarkerIcon,
-  PhoneIcon,
-  PlusOutlineIcon,
-  TrashIcon,
 };

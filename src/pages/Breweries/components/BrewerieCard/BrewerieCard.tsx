@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */ // @TO-DO remove this line
 import React from 'react';
-import { TrashIcon } from 'assets/icons';
 
 import { BreweryDetail } from 'services/services/BreweriesService/type.BreweriesService';
 import { useBreweryContext } from 'pages/Breweries/Context/BreweriesContext';
+import { renderIcon } from 'assets/icons';
 import { CardContainer } from './styles.BrewerieCard';
 import { InfoTag } from './InfoTag';
 
@@ -49,7 +49,10 @@ export const BrewerieCard: React.FC<BreweryDetail> = ({
 
   return (
     <CardContainer>
-      <TrashIcon className="remove-icon" onClick={OnRemoveCard} />
+      {renderIcon('TrashIcon', {
+        className: 'remove-icon',
+        onClick: OnRemoveCard,
+      })}
       <h3 className="card-title">{name}</h3>
       <div className="card-info">
         <p>
