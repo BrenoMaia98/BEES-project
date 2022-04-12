@@ -11,7 +11,6 @@ import {
   InfoTag,
   InfoTagProps,
 } from 'pages/Breweries/components/BreweryCard/InfoTag';
-import { debug } from 'console';
 
 const testIds = {
   text: 'text-tag-info',
@@ -23,6 +22,8 @@ const testIds = {
   removeableTag: 'removeable-tag',
 };
 
+const mockInfoTagAction = jest.fn();
+
 const mockDefaultTag: InfoTagProps = {
   type: 'default',
   icon: 'GraphIcon',
@@ -31,12 +32,12 @@ const mockDefaultTag: InfoTagProps = {
 const mockAddInfoTag: InfoTagProps = {
   type: 'addInfo',
   text: 'mockAddInfoTag',
-  action: jest.fn(),
+  action: mockInfoTagAction,
 };
 const mockRemoveableTag: InfoTagProps = {
   type: 'removeable',
   text: 'mockRemoveableTag',
-  action: jest.fn(),
+  action: mockInfoTagAction,
 };
 
 const renderComponent = (
@@ -126,7 +127,6 @@ describe('InfoTag', () => {
       const inputText = queryByTestId('input-text');
 
       expect(document.activeElement === inputText).toBeTruthy();
-      // await waitFor(() => expect(inputText).toHaveFocus());
     });
 
     it('Should hide InputText on "Enter" press', async () => {
@@ -152,11 +152,26 @@ describe('InfoTag', () => {
     });
 
     it('Should call InfoTag action props on InputText Blur', () => {
-      expect(true).toBeTruthy();
+      const component: RenderResult = renderComponent('addInfo');
+      const { getByTestId } = component;
+      displayInputText(component);
+      const inputText = getByTestId('input-text');
+
+      fireEvent.blur(inputText);
+
+      expect(mockInfoTagAction).toBeCalledTimes(1);
     });
 
-    it('Should call InfoTag action props on "Enter" press', () => {
-      expect(true).toBeTruthy();
+    it('Should call InfoTag action props on "Enter" keyDown', () => {
+      const component: RenderResult = renderComponent('addInfo');
+      const { getByTestId } = component;
+      displayInputText(component);
+      const inputText = getByTestId('input-text');
+
+      fireEvent.change(inputText, { target: { value: 'new info' } });
+      fireEvent.keyDown(inputText, { key: 'Enter', charCode: 13 });
+
+      expect(mockInfoTagAction).toBeCalledTimes(1);
     });
   });
 });
