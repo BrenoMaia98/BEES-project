@@ -9,7 +9,7 @@ import {
   useBreweryContext,
 } from './Context/BreweriesContext';
 
-const BreweriesPage: React.FC = () => {
+export const BreweriesPage: React.FC = () => {
   const { listBreweries, state } = useBreweryContext();
 
   useEffect(() => {

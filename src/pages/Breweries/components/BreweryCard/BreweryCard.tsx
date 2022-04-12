@@ -48,7 +48,7 @@ export const BreweryCard: React.FC<BreweryDetail> = ({
   };
 
   return (
-    <CardContainer>
+    <CardContainer data-testid="brewery-card">
       {renderIcon('TrashIcon', {
         className: 'remove-icon',
         onClick: OnRemoveCard,

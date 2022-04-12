@@ -18,7 +18,7 @@ const defaultValues: BreweryStateValue = {
   autocompleteSuggestion: [],
 };
 
-const contextDefaultValue = {
+export const contextDefaultValue = {
   state: defaultValues,
   listBreweries: async () => {},
   getBreweryById: async () => {},
