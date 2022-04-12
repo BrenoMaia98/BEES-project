@@ -17,8 +17,8 @@ export const HeaderApp: React.FC = () => {
           {renderIcon('ArrowBackIcon')} <span>Go back</span>
         </div>
       </Link>
-      <h3>Hello {userName}!</h3>
-      <Switch onToggle={toggleTheme} />
+      <h3 data-testid="header-username">Hello {userName}!</h3>
+      <Switch onToggle={toggleTheme} dataTestId="toggle-theme-switch" />
     </Header>
   );
 };
