@@ -19,6 +19,21 @@ const testIds = {
 };
 
 describe('Home Form', () => {
+  describe('Should display', () => {
+    it.each`
+      fieldName          | testId
+      ${'name input'}    | ${testIds.input}
+      ${'age checkbox'}  | ${testIds.checkbox}
+      ${'submit button'} | ${testIds.submitButton}
+    `('$fieldName', ({ testId }) => {
+      const { queryByTestId } = renderForm();
+
+      const component = queryByTestId(testId);
+
+      expect(component).not.toBeNull();
+    });
+  });
+
   describe('Should display error messages when', () => {
     describe('user name input', () => {
       it.each`
