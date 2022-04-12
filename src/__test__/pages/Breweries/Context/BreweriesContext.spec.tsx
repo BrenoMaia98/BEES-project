@@ -20,7 +20,7 @@ import {
 } from '__mock__/breweriesMockObjs';
 
 const apiMock = new MockAdapter(axios);
-const renderContext = (): RenderHookResult<
+const renderComponent = (): RenderHookResult<
   {},
   ContextDefaultValue,
   Renderer<{}>
@@ -67,7 +67,7 @@ describe('Breweries Context', () => {
   };
 
   it('Function "addMoreInfo" - Should add one info to a specific brewery', async () => {
-    const context = renderContext();
+    const context = renderComponent();
 
     const addParam = {
       context,
@@ -87,7 +87,7 @@ describe('Breweries Context', () => {
   });
 
   it('Function "removeInfoByIndex" - Should remove one info from a specif brewery on method ', async () => {
-    const context = renderContext();
+    const context = renderComponent();
 
     await loadBreweriesContext(context);
 
@@ -111,7 +111,7 @@ describe('Breweries Context', () => {
   });
 
   it('Function "deleteBreweryById" - Should remove specific brewery from state.breweriesList', async () => {
-    const context = renderContext();
+    const context = renderComponent();
 
     await loadBreweriesContext(context);
 

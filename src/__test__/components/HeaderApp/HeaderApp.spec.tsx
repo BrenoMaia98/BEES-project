@@ -6,7 +6,7 @@ import { GlobalThemeProvider } from 'global/theme/globalThemeProvider';
 import { GlobalContextProvider } from 'global/GlobalContext';
 import { MemoryRouter } from 'react-router-dom';
 
-const renderHeaderApp = (): RenderResult => {
+const renderComponent = (): RenderResult => {
   return render(
     <MemoryRouter>
       <GlobalContextProvider>
@@ -32,7 +32,7 @@ describe('HeaderApp', () => {
       ${'arrow back'}       | ${testIds.arrowBack}
       ${'switch app theme'} | ${testIds.themeSwitch}
     `('$componentName', ({ testId }) => {
-      const { queryByTestId } = renderHeaderApp();
+      const { queryByTestId } = renderComponent();
 
       const component = queryByTestId(testId);
 

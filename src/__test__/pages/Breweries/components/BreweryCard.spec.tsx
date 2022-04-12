@@ -5,7 +5,7 @@ import { BreweryCard } from 'pages/Breweries/components/BreweryCard/BreweryCard'
 import { IconsDataTestIdEnum } from 'assets/icons';
 import { mockBreweryDetails } from '__mock__/breweriesMockObjs';
 
-const renderBreweryDetail = (): RenderResult => {
+const renderComponent = (): RenderResult => {
   return render(
     <GlobalThemeProvider>
       <BreweryCard {...mockBreweryDetails} />
@@ -35,7 +35,7 @@ describe('HeaderApp', () => {
       ${'phone tag'}        | ${testIds.phoneTag}
       ${'addMoreInfo tag'}  | ${testIds.addMoreInfoTag}
     `('$componentName', ({ testId }) => {
-      const { queryByTestId } = renderBreweryDetail();
+      const { queryByTestId } = renderComponent();
 
       const component = queryByTestId(testId);
 

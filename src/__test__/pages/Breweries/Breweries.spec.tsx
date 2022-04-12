@@ -14,7 +14,7 @@ jest.mock('pages/Breweries/Context/BreweriesContext', () => ({
   useBreweryContext: jest.fn(),
 }));
 
-const renderBreweriesPage = (): RenderResult => {
+const renderComponent = (): RenderResult => {
   return render(
     <MemoryRouter>
       <GlobalThemeProvider>
@@ -63,7 +63,7 @@ describe('Breweries Page', () => {
       () => contextDefaultValue
     );
 
-    renderBreweriesPage();
+    renderComponent();
 
     expect(mockListBreweries).toHaveBeenCalledTimes(1);
   });
@@ -82,7 +82,7 @@ describe('Breweries Page', () => {
       },
     }));
 
-    const { queryAllByTestId } = renderBreweriesPage();
+    const { queryAllByTestId } = renderComponent();
 
     const cards = queryAllByTestId('brewery-card');
 

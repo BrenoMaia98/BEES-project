@@ -5,7 +5,7 @@ import { HomeForm } from 'pages/Home/components/HomeForm/HomeForm';
 
 const mockOnSubmit = jest.fn();
 
-const renderForm = (): RenderResult => {
+const renderComponent = (): RenderResult => {
   return render(
     <GlobalThemeProvider>
       <HomeForm onSubmit={mockOnSubmit} />
@@ -26,7 +26,7 @@ describe('Home Form', () => {
       ${'age checkbox'}  | ${testIds.checkbox}
       ${'submit button'} | ${testIds.submitButton}
     `('$fieldName', ({ testId }) => {
-      const { queryByTestId } = renderForm();
+      const { queryByTestId } = renderComponent();
 
       const component = queryByTestId(testId);
 
@@ -44,7 +44,7 @@ describe('Home Form', () => {
         ${'has two words and both are smaller than 3 characters'}           | ${'Ab Cd'}
         ${'has more than two words, but all are smaller than 3 characters'} | ${'Ab Cd Ef Gh'}
       `('$scenario', ({ testString }) => {
-        const { getByTestId, queryByText } = renderForm();
+        const { getByTestId, queryByText } = renderComponent();
 
         const input = getByTestId(testIds.input);
 
@@ -63,7 +63,7 @@ describe('Home Form', () => {
     });
 
     it('age checkbox is not checked', () => {
-      const { getByTestId, queryByText } = renderForm();
+      const { getByTestId, queryByText } = renderComponent();
       const submitButton = getByTestId(testIds.submitButton);
 
       fireEvent.click(submitButton);
@@ -76,7 +76,7 @@ describe('Home Form', () => {
 
   it('Should call onSubmit when form pass on validation test', () => {
     const validUserName = 'Breno Cruz';
-    const { getByTestId } = renderForm();
+    const { getByTestId } = renderComponent();
 
     const input = getByTestId(testIds.input);
     fireEvent.change(input, { target: { value: validUserName } });
