@@ -1,5 +1,6 @@
 import BeeSrcImg from './bee.png';
-import WelcomeLogo from './welcomeLogo.png';
+import WelcomeLogoBlack from './welcomeLogo-black.png';
+import WelcomeLogoWhite from './welcomeLogo-white.png';
 import BeesLogo from './beesLogo.png';
 
-export { BeeSrcImg, WelcomeLogo, BeesLogo };
+export { BeeSrcImg, WelcomeLogoBlack, WelcomeLogoWhite, BeesLogo };

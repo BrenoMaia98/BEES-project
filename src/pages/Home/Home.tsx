@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 import { RouteNames } from 'routes/RoutesUtils';
 
-import { BeeSrcImg, WelcomeLogo } from 'assets/imgs';
+import { BeeSrcImg, WelcomeLogoBlack, WelcomeLogoWhite } from 'assets/imgs';
 import { useGlobalContext } from 'global/GlobalContext';
 import { Switch } from 'components/Switch/Switch';
+import { useTheme } from 'styled-components';
+import { Palette } from 'global/theme/theme';
 import {
   Container,
   AlignContent,
@@ -19,6 +21,7 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   const { toggleTheme } = useGlobalContext();
   const { setUserName } = useGlobalContext();
+  const theme = useTheme() as Palette;
 
   const onSubmitForm = (nameValue: string) => {
     setUserName(nameValue);
@@ -31,7 +34,7 @@ const Home: React.FC = () => {
         <Switch onToggle={toggleTheme} />
       </div>
       <AlignContent>
-        <Logo src={WelcomeLogo} />
+        <Logo src={theme.darkTheme ? WelcomeLogoWhite : WelcomeLogoBlack} />
         <LoginsContainer>
           <p>Please, enter your full name below</p>
           <p>Only alphabetical characters are accepted</p>
