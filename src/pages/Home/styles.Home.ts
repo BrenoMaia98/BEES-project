@@ -21,16 +21,24 @@ export const Container = styled.div`
   }
 `;
 
+export const Logo = styled.img`
+  color: ${({ theme }) => theme.font.primaryBg};
+  max-height: 12em;
+  max-width: 75vw;
+`;
 export const LoginsContainer = styled.div`
+  margin-bottom: 10em;
   > p {
     margin: 0.75rem 0px;
   }
 `;
 
-export const Title = styled.h1`
-  color: ${({ theme }) => theme.font.primaryBg};
-  position: absolute;
-  top: 12.5%;
+export const AlignContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 `;
 
 export const BeeImg = styled.img`
