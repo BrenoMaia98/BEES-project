@@ -66,7 +66,7 @@ describe('Breweries Context', () => {
     });
   };
 
-  it('Should add one info to a specific brewery on method addMoreInfo', async () => {
+  it('Function "addMoreInfo" - Should add one info to a specific brewery', async () => {
     const context = renderContext();
 
     const addParam = {
@@ -86,7 +86,7 @@ describe('Breweries Context', () => {
     expect(updatedBrewery?.moreInfo).toStrictEqual([addParam.info]);
   });
 
-  it('Should remove one info from a specif brewery on method removeInfoByIndex', async () => {
+  it('Function "removeInfoByIndex" - Should remove one info from a specif brewery on method ', async () => {
     const context = renderContext();
 
     await loadBreweriesContext(context);
@@ -108,5 +108,24 @@ describe('Breweries Context', () => {
       (item) => item.id === id
     );
     expect(updatedBrewery?.moreInfo).toStrictEqual(['info 2', 'info 3']);
+  });
+
+  it('Function "deleteBreweryById" - Should remove specific brewery from state.breweriesList', async () => {
+    const context = renderContext();
+
+    await loadBreweriesContext(context);
+
+    const breweriesList = [...context.result.current.state.breweriesList];
+    const firstBrewery = breweriesList[0] || null;
+
+    expect(firstBrewery).not.toBeNull();
+
+    act(() => {
+      context.result.current.deleteBreweryById(firstBrewery.id);
+    });
+
+    expect(context.result.current.state.breweriesList).toStrictEqual(
+      breweriesList.slice(1)
+    );
   });
 });
