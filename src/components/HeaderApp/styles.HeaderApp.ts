@@ -25,6 +25,9 @@ export const Header = styled.header`
     svg {
       width: 1.5rem;
       margin-right: 0.25rem;
+      * {
+        fill: ${({ theme }) => theme.secondary};
+      }
     }
     span {
       font-size: 1.5rem;

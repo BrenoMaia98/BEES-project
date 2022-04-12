@@ -1,55 +1,87 @@
 import React from 'react';
-import { ReactComponent as WebIcon } from './web.svg';
-import { ReactComponent as ArrowBackIcon } from './arrow-back.svg';
-import { ReactComponent as GraphIcon } from './graph.svg';
-import { ReactComponent as LocationMarkerIcon } from './location-marker.svg';
-import { ReactComponent as PhoneIcon } from './phone.svg';
-import { ReactComponent as PlusOutlineIcon } from './plus-outline.svg';
-import { ReactComponent as TrashIcon } from './trash.svg';
+import {
+  ArrowBackIcon,
+  GraphIcon,
+  LocationMarkerIcon,
+  OtherProps,
+  PhoneIcon,
+  PlusOutlineIcon,
+  TrashIcon,
+  WebIcon,
+} from './svgsExport';
 
 export type IconName =
-  | 'WebIcon'
   | 'ArrowBackIcon'
   | 'GraphIcon'
   | 'LocationMarkerIcon'
   | 'PhoneIcon'
   | 'PlusOutlineIcon'
-  | 'TrashIcon';
+  | 'TrashIcon'
+  | 'WebIcon';
 
-export const renderIcon = (iconName: IconName): JSX.Element | null => {
+export enum IconsDataTestIdEnum {
+  'ArrowBackIcon' = 'arrow-back-icon',
+  'GraphIcon' = 'graph-icon',
+  'LocationMarkerIcon' = 'location-marker-icon',
+  'PhoneIcon' = 'phone-icon',
+  'PlusOutlineIcon' = 'plus-outline-icon',
+  'TrashIcon' = 'trash-icon',
+  'WebIcon' = 'web-icon',
+}
+export const renderIcon = (
+  iconName: IconName,
+  otherProps?: OtherProps
+): JSX.Element | null => {
   switch (iconName) {
     case 'WebIcon': {
-      return <WebIcon />;
+      return (
+        <WebIcon {...otherProps} data-testid={IconsDataTestIdEnum.WebIcon} />
+      );
     }
     case 'ArrowBackIcon': {
-      return <ArrowBackIcon />;
+      return <ArrowBackIcon data-testid={IconsDataTestIdEnum.ArrowBackIcon} />;
     }
     case 'GraphIcon': {
-      return <GraphIcon />;
+      return (
+        <GraphIcon
+          {...otherProps}
+          data-testid={IconsDataTestIdEnum.GraphIcon}
+        />
+      );
     }
     case 'LocationMarkerIcon': {
-      return <LocationMarkerIcon />;
+      return (
+        <LocationMarkerIcon
+          {...otherProps}
+          data-testid={IconsDataTestIdEnum.LocationMarkerIcon}
+        />
+      );
     }
     case 'PhoneIcon': {
-      return <PhoneIcon />;
+      return (
+        <PhoneIcon
+          {...otherProps}
+          data-testid={IconsDataTestIdEnum.PhoneIcon}
+        />
+      );
     }
     case 'PlusOutlineIcon': {
-      return <PlusOutlineIcon />;
+      return (
+        <PlusOutlineIcon
+          {...otherProps}
+          data-testid={IconsDataTestIdEnum.PlusOutlineIcon}
+        />
+      );
     }
     case 'TrashIcon': {
-      return <TrashIcon />;
+      return (
+        <TrashIcon
+          {...otherProps}
+          data-testid={IconsDataTestIdEnum.TrashIcon}
+        />
+      );
     }
     default:
       return null;
   }
-};
-
-export {
-  WebIcon,
-  ArrowBackIcon,
-  GraphIcon,
-  LocationMarkerIcon,
-  PhoneIcon,
-  PlusOutlineIcon,
-  TrashIcon,
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { RouteNames } from 'routes/RoutesUtils';
 
-import { ArrowBackIcon } from 'assets/icons';
+import { renderIcon } from 'assets/icons';
 import { useGlobalContext } from 'global/GlobalContext';
 import { Switch } from 'components/Switch/Switch';
 import { Header } from './styles.HeaderApp';
@@ -14,11 +14,11 @@ export const HeaderApp: React.FC = () => {
     <Header>
       <Link to={RouteNames.home}>
         <div className="go-back-div">
-          <ArrowBackIcon /> <span>Go back</span>
+          {renderIcon('ArrowBackIcon')} <span>Go back</span>
         </div>
       </Link>
-      <h3>Hello {userName}!</h3>
-      <Switch onToggle={toggleTheme} />
+      <h3 data-testid="header-username">Hello {userName}!</h3>
+      <Switch onToggle={toggleTheme} dataTestId="toggle-theme-switch" />
     </Header>
   );
 };

@@ -1,29 +1,39 @@
-import React, { useRef, useState } from 'react';
+import React, { RefObject, useRef, useState } from 'react';
 import { IconName, renderIcon } from 'assets/icons';
-import { RemoveableTagDiv, TagDiv } from './styles.BrewerieCard';
+import InputText from 'components/InputText/InputText';
+import { RemoveableTagDiv, TagDiv } from './styles.BreweryCard';
 
-type TagProps =
+export type InfoTagProps =
   | {
       type?: 'default';
       icon: IconName;
       text: string;
       action?: (_: string) => void;
+      'data-testid'?: string;
     }
   | {
       type: 'addInfo';
       icon?: IconName;
       text: string;
       action: (info: string) => void;
+      'data-testid'?: string;
     }
   | {
       type: 'removeable';
       icon?: IconName;
       text: string;
       action: (_: string) => void;
+      'data-testid'?: string;
     };
 
-export const InfoTag = ({ type = 'default', text, action, icon }: TagProps) => {
-  const inputRef = useRef<HTMLInputElement>();
+export const InfoTag = ({
+  type = 'default',
+  text,
+  action,
+  icon,
+  ...rest
+}: InfoTagProps) => {
+  const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const [showInput, setShowInput] = useState(false);
 
   const onClickAddMore = () => {
@@ -31,7 +41,7 @@ export const InfoTag = ({ type = 'default', text, action, icon }: TagProps) => {
       setShowInput((state) => !state);
       setTimeout(() => {
         inputRef.current?.focus();
-      }, 100);
+      }, 500);
     }
   };
 
@@ -54,41 +64,48 @@ export const InfoTag = ({ type = 'default', text, action, icon }: TagProps) => {
   switch (type) {
     case 'addInfo':
       return (
-        <TagDiv onClick={onClickAddMore}>
+        <TagDiv
+          onClick={onClickAddMore}
+          data-testid={rest['data-testid'] || 'add-info-tag'}
+        >
           <div className={action ? 'hover' : ''}>
             {renderIcon('PlusOutlineIcon')}
             {showInput ? (
-              <input
+              <InputText
                 onBlur={submitInfo}
-                onSubmit={(e) => {
+                onSubmit={() => {
                   submitInfo();
                 }}
+                inputRef={inputRef}
                 onKeyDown={handleKeyDown}
                 type="text"
-                ref={inputRef as React.LegacyRef<HTMLInputElement>}
+                autoFocus
                 id="new-info"
               />
             ) : (
-              <span>{text || 'no info'}</span>
+              <span data-testid="text-tag-info">{text || 'no info'}</span>
             )}
           </div>
         </TagDiv>
       );
     case 'removeable':
       return (
-        <RemoveableTagDiv onClick={() => (action ? action('') : undefined)}>
+        <RemoveableTagDiv
+          onClick={() => (action ? action('') : undefined)}
+          data-testid={rest['data-testid'] || 'removeable-info-tag'}
+        >
           {renderIcon('TrashIcon')}
-          <span>{text || 'no info'}</span>
+          <span data-testid="text-tag-info">{text || 'no info'}</span>
         </RemoveableTagDiv>
       );
     // eslint-disable-next-line default-case-last
     default:
     case 'default':
       return (
-        <TagDiv onClick={() => (action ? action('') : undefined)}>
+        <TagDiv data-testid={rest['data-testid'] || 'info-tag'}>
           <div className={action ? 'hover' : ''}>
             {(icon && renderIcon(icon)) || null}
-            <span>{text || 'no info'}</span>
+            <span data-testid="text-tag-info">{text || 'no info'}</span>
           </div>
         </TagDiv>
       );

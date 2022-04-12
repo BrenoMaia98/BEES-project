@@ -1,35 +1,33 @@
 /* eslint-disable camelcase */
-import { api } from 'services/api';
+import axios from 'axios';
+import { api, baseUrl } from 'services/api';
 import {
   AutocompleteItem,
   BreweryDetail,
   BreweryDetailResponseAPI,
 } from './type.BreweriesService';
 
-export class BreweriesService {
-  private baseUrl = 'breweries';
+class BreweriesService {
+  private baseUrl = `${baseUrl}/breweries`;
 
+  // eslint-disable-next-line class-methods-use-this
   ListBreweries() {
-    console.log('Service > ListBreweries');
     return api.get<BreweryDetailResponseAPI[]>(`${this.baseUrl}`);
   }
 
   GetBrewery(breweryId: string | number) {
-    console.log('Service > GetBrewery');
     return api.get<BreweryDetailResponseAPI>(
       `${this.baseUrl}/${String(breweryId)}`
     );
   }
 
   SearchBreweries(searchString: string) {
-    console.log('Service > SearchBreweries');
     return api.get<BreweryDetailResponseAPI[]>(
       `${this.baseUrl}/search?query=${searchString}`
     );
   }
 
   Autocomplete(autocompleteString: string) {
-    console.log('Service > Autocomplete');
     return api.get<AutocompleteItem[]>(
       `${this.baseUrl}/autocomplete?query=${autocompleteString}`
     );
@@ -62,3 +60,5 @@ export const mapBreweryDetailResponseAPI = ({
   websiteUrl: website_url,
   moreInfo: [],
 });
+
+export default BreweriesService;

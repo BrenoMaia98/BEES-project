@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useContext, useEffect, useMemo, useReducer } from 'react';
-import {
-  BreweriesService,
+import BreweriesService, {
   mapBreweryDetailResponseAPI,
 } from 'services/services/BreweriesService/BreweriesService';
 import {
@@ -18,7 +17,7 @@ const defaultValues: BreweryStateValue = {
   autocompleteSuggestion: [],
 };
 
-const contextDefaultValue = {
+export const contextDefaultValue = {
   state: defaultValues,
   listBreweries: async () => {},
   getBreweryById: async () => {},
@@ -37,7 +36,6 @@ const breweriesReducer = (
   action: BreweriesAction
 ): BreweryStateValue => {
   const { payload, type } = action;
-  console.log({ payload, type });
   switch (type) {
     case 'SET_AUTOCOMPLETE_SUGGESTION':
       return {
@@ -120,7 +118,6 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
   }, [state.searchString]);
 
   const listBreweries = async () => {
-    console.log('Context ListBreweries > ');
     const resp = await service.ListBreweries();
     dispatch({
       type: BreweryActionType.SET_BREWERIES_LIST,
@@ -129,7 +126,6 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
   };
 
   const getBreweryById = async (breweryId: string | number) => {
-    console.log('Context GetBreweryById > ');
     const resp = await service.GetBrewery(breweryId);
     dispatch({
       type: BreweryActionType.SET_BREWERIES_DETAIL,
@@ -138,7 +134,6 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
   };
 
   const searchBreweriesByName = async (searchString: string) => {
-    console.log('Context > SearchBreweriesByName ');
     dispatch({
       type: BreweryActionType.SET_SEARCH_VALUE,
       payload: searchString,
@@ -146,7 +141,6 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
   };
 
   const getSearchSuggestionList = async (searchString: string) => {
-    console.log('Context > GetSearchSuggestionList ');
     const resp = await service.Autocomplete(searchString);
     dispatch({
       type: BreweryActionType.SET_AUTOCOMPLETE_SUGGESTION,
@@ -155,7 +149,6 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
   };
 
   const deleteBreweryById = (id: string | number) => {
-    console.log('Context > deleteBreweryById ');
     dispatch({
       type: BreweryActionType.REMOVE_BREWERY_BY_ID,
       payload: { id },
@@ -169,7 +162,6 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
     breweryId: string | number;
     newInfo: string;
   }) => {
-    console.log('Context > addMoreInfo ');
     dispatch({
       type: BreweryActionType.ADD_MORE_INFO_TO_BREWERY,
       payload: { breweryId, newInfo },
@@ -182,7 +174,6 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
     breweryId: string | number;
     infoIndex: number;
   }) => {
-    console.log('Context > removeInfoByIndex ');
     dispatch({
       type: BreweryActionType.REMOVE_INFO_FROM_BREWERY,
       payload: { breweryId, infoIndex },
