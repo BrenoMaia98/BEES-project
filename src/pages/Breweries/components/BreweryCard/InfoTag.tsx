@@ -46,7 +46,6 @@ export const InfoTag = ({
   };
 
   const submitInfo = () => {
-    console.log(action, inputRef, inputRef.current);
     if (action && inputRef && inputRef.current) {
       action(inputRef.current.value);
       setShowInput((state) => !state);
