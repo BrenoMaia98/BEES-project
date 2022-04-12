@@ -49,6 +49,23 @@ describe('Breweries Context', () => {
     );
   };
 
+  const addInfoToBreweryId = ({
+    context,
+    id = '1',
+    info = 'new info',
+  }: {
+    context: RenderHookResult<{}, ContextDefaultValue, Renderer<{}>>;
+    id?: string;
+    info?: string;
+  }) => {
+    act(() => {
+      context.result.current.addMoreInfo({
+        breweryId: id,
+        newInfo: info,
+      });
+    });
+  };
+
   it('Should add one info to a specific brewery on method addMoreInfo', async () => {
     const context = renderContext();
 
@@ -60,12 +77,7 @@ describe('Breweries Context', () => {
 
     await loadBreweriesContext(context);
 
-    act(() => {
-      context.result.current.addMoreInfo({
-        breweryId: addParam.id,
-        newInfo: addParam.info,
-      });
-    });
+    addInfoToBreweryId(addParam);
 
     const updatedBrewery = context.result.current.state.breweriesList.find(
       (item) => item.id === addParam.id
@@ -74,4 +86,27 @@ describe('Breweries Context', () => {
     expect(updatedBrewery?.moreInfo).toStrictEqual([addParam.info]);
   });
 
+  it('Should remove one info from a specif brewery on method removeInfoByIndex', async () => {
+    const context = renderContext();
+
+    await loadBreweriesContext(context);
+
+    const id = '1';
+
+    addInfoToBreweryId({ info: 'info 1', id, context });
+    addInfoToBreweryId({ info: 'info 2', id, context });
+    addInfoToBreweryId({ info: 'info 3', id, context });
+
+    act(() => {
+      context.result.current.removeInfoByIndex({
+        breweryId: id,
+        infoIndex: 0,
+      });
+    });
+
+    const updatedBrewery = context.result.current.state.breweriesList.find(
+      (item) => item.id === id
+    );
+    expect(updatedBrewery?.moreInfo).toStrictEqual(['info 2', 'info 3']);
+  });
 });
