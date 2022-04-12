@@ -12,27 +12,22 @@ class BreweriesService {
 
   // eslint-disable-next-line class-methods-use-this
   ListBreweries() {
-    console.log('Service > ListBreweries');
-    // return api.get<BreweryDetailResponseAPI[]>(`${this.baseUrl}`);
-    return axios.get<BreweryDetailResponseAPI[]>(`${this.baseUrl}`);
+    return api.get<BreweryDetailResponseAPI[]>(`${this.baseUrl}`);
   }
 
   GetBrewery(breweryId: string | number) {
-    console.log('Service > GetBrewery');
     return api.get<BreweryDetailResponseAPI>(
       `${this.baseUrl}/${String(breweryId)}`
     );
   }
 
   SearchBreweries(searchString: string) {
-    console.log('Service > SearchBreweries');
     return api.get<BreweryDetailResponseAPI[]>(
       `${this.baseUrl}/search?query=${searchString}`
     );
   }
 
   Autocomplete(autocompleteString: string) {
-    console.log('Service > Autocomplete');
     return api.get<AutocompleteItem[]>(
       `${this.baseUrl}/autocomplete?query=${autocompleteString}`
     );
