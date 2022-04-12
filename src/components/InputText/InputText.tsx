@@ -61,6 +61,7 @@ const InputText: React.FC<InputTextProps> = ({
 
   return (
     <StylesInputText
+      data-testid="input-text"
       type="text"
       onChange={handleChangeInput}
       // ref={inputRef}
