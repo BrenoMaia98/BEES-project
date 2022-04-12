@@ -2,23 +2,8 @@ import React from 'react';
 import { render, RenderResult } from '@testing-library/react';
 import { GlobalThemeProvider } from 'global/theme/globalThemeProvider';
 import { BreweryCard } from 'pages/Breweries/components/BreweryCard/BreweryCard';
-import { BreweryDetail } from 'services/services/BreweriesService/type.BreweriesService';
 import { IconsDataTestIdEnum } from 'assets/icons';
-
-const mockBreweryDetails: BreweryDetail = {
-  id: 299,
-  name: 'Almanac Beer Company',
-  breweryType: 'micro',
-  street: '651B W Tower Ave',
-  city: 'Alameda',
-  state: 'California',
-  countyProvince: '',
-  postalCode: '94501-5047',
-  country: 'United States',
-  phone: '4159326531',
-  websiteUrl: 'http://almanacbeer.com',
-  moreInfo: [],
-};
+import { mockBreweryDetails } from '__mock__/breweriesMockObjs';
 
 const renderBreweryDetail = (): RenderResult => {
   return render(
