@@ -1,7 +1,7 @@
 import React, { RefObject, useRef, useState } from 'react';
 import { IconName, renderIcon } from 'assets/icons';
 import InputText from 'components/InputText/InputText';
-import { RemoveableTagDiv, TagDiv } from './styles.BrewerieCard';
+import { RemoveableTagDiv, TagDiv } from './styles.BreweryCard';
 
 type TagProps =
   | {
@@ -9,21 +9,30 @@ type TagProps =
       icon: IconName;
       text: string;
       action?: (_: string) => void;
+      'data-testid'?: string;
     }
   | {
       type: 'addInfo';
       icon?: IconName;
       text: string;
       action: (info: string) => void;
+      'data-testid'?: string;
     }
   | {
       type: 'removeable';
       icon?: IconName;
       text: string;
       action: (_: string) => void;
+      'data-testid'?: string;
     };
 
-export const InfoTag = ({ type = 'default', text, action, icon }: TagProps) => {
+export const InfoTag = ({
+  type = 'default',
+  text,
+  action,
+  icon,
+  ...rest
+}: TagProps) => {
   const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const [showInput, setShowInput] = useState(false);
 
@@ -56,7 +65,10 @@ export const InfoTag = ({ type = 'default', text, action, icon }: TagProps) => {
   switch (type) {
     case 'addInfo':
       return (
-        <TagDiv onClick={onClickAddMore}>
+        <TagDiv
+          onClick={onClickAddMore}
+          data-testid={rest['data-testid'] || 'add-info-tag'}
+        >
           <div className={action ? 'hover' : ''}>
             {renderIcon('PlusOutlineIcon')}
             {showInput ? (
@@ -79,7 +91,10 @@ export const InfoTag = ({ type = 'default', text, action, icon }: TagProps) => {
       );
     case 'removeable':
       return (
-        <RemoveableTagDiv onClick={() => (action ? action('') : undefined)}>
+        <RemoveableTagDiv
+          onClick={() => (action ? action('') : undefined)}
+          data-testid={rest['data-testid'] || 'removeable-info-tag'}
+        >
           {renderIcon('TrashIcon')}
           <span>{text || 'no info'}</span>
         </RemoveableTagDiv>
@@ -88,7 +103,7 @@ export const InfoTag = ({ type = 'default', text, action, icon }: TagProps) => {
     default:
     case 'default':
       return (
-        <TagDiv>
+        <TagDiv data-testid={rest['data-testid'] || 'info-tag'}>
           <div className={action ? 'hover' : ''}>
             {(icon && renderIcon(icon)) || null}
             <span>{text || 'no info'}</span>

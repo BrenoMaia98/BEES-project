@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 
 import { HeaderApp } from 'components/HeaderApp/HeaderApp';
 import { Container, MainContent } from './styles.Breweries';
-import { BrewerieCard } from './components/BrewerieCard/BrewerieCard';
+import { BreweryCard } from './components/BreweryCard/BreweryCard';
 import {
   BreweryContextProvider,
   useBreweryContext,
@@ -21,7 +21,7 @@ const BreweriesPage: React.FC = () => {
       <HeaderApp />
       <MainContent>
         {state.breweriesList.map((brewery) => {
-          return <BrewerieCard key={brewery.id} {...brewery} />;
+          return <BreweryCard key={brewery.id} {...brewery} />;
         })}
       </MainContent>
     </Container>

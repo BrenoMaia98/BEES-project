@@ -3,11 +3,11 @@ import React from 'react';
 
 import { BreweryDetail } from 'services/services/BreweriesService/type.BreweriesService';
 import { useBreweryContext } from 'pages/Breweries/Context/BreweriesContext';
-import { renderIcon } from 'assets/icons';
-import { CardContainer } from './styles.BrewerieCard';
+import { IconsDataTestIdEnum, renderIcon } from 'assets/icons';
+import { CardContainer } from './styles.BreweryCard';
 import { InfoTag } from './InfoTag';
 
-export const BrewerieCard: React.FC<BreweryDetail> = ({
+export const BreweryCard: React.FC<BreweryDetail> = ({
   id,
   name,
   street,
@@ -53,8 +53,10 @@ export const BrewerieCard: React.FC<BreweryDetail> = ({
         className: 'remove-icon',
         onClick: OnRemoveCard,
       })}
-      <h3 className="card-title">{name}</h3>
-      <div className="card-info">
+      <h3 className="card-title" data-testid="brewery-title">
+        {name}
+      </h3>
+      <div className="card-info" data-testid="brewery-address">
         <p>
           {street}
           <br />
@@ -63,9 +65,21 @@ export const BrewerieCard: React.FC<BreweryDetail> = ({
       </div>
 
       <div className="tagsList">
-        <InfoTag icon="GraphIcon" text={breweryType} />
-        <InfoTag icon="LocationMarkerIcon" text={postalCode} />
-        <InfoTag icon="PhoneIcon" text={formatPhoneNumber(String(phone))} />
+        <InfoTag
+          icon="GraphIcon"
+          text={breweryType}
+          data-testid="brewery-brewery-type-tag"
+        />
+        <InfoTag
+          icon="LocationMarkerIcon"
+          text={postalCode}
+          data-testid="brewery-zipcode-tag"
+        />
+        <InfoTag
+          icon="PhoneIcon"
+          text={formatPhoneNumber(String(phone))}
+          data-testid="brewery-phone-tag"
+        />
         {moreInfo.map((info, index) => (
           <InfoTag
             type="removeable"
@@ -77,6 +91,7 @@ export const BrewerieCard: React.FC<BreweryDetail> = ({
           type="addInfo"
           text="add more"
           action={handleClickOnAddMoreInfo}
+          data-testid="brewery-add-more-info-tag"
         />
       </div>
     </CardContainer>
