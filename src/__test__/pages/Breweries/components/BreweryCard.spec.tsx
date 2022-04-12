@@ -1,9 +1,10 @@
 import React from 'react';
-import { render, RenderResult } from '@testing-library/react';
+import { fireEvent, render, RenderResult } from '@testing-library/react';
 import { GlobalThemeProvider } from 'global/theme/globalThemeProvider';
 import { BreweryCard } from 'pages/Breweries/components/BreweryCard/BreweryCard';
 import { IconsDataTestIdEnum } from 'assets/icons';
 import { mockBreweryDetails } from '__mock__/breweriesMockObjs';
+import '@testing-library/jest-dom/extend-expect';
 
 const renderComponent = (): RenderResult => {
   return render(
@@ -41,5 +42,12 @@ describe('HeaderApp', () => {
 
       expect(component).not.toBeNull();
     });
+  });
+  it('Remove icon should have an onclick function', () => {
+    const { queryByTestId, debug } = renderComponent();
+
+    const icon = queryByTestId(testIds.removeIcon);
+
+    expect(icon?.onclick).toBeDefined();
   });
 });
