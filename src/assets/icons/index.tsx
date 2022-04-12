@@ -1,34 +1,33 @@
 import React from 'react';
-import { ReactComponent as WebIcon } from './web.svg';
-import { ReactComponent as ArrowBackIcon } from './arrow-back.svg';
-import { ReactComponent as GraphIcon } from './graph.svg';
-import { ReactComponent as LocationMarkerIcon } from './location-marker.svg';
-import { ReactComponent as PhoneIcon } from './phone.svg';
-import { ReactComponent as PlusOutlineIcon } from './plus-outline.svg';
-import { ReactComponent as TrashIcon } from './trash.svg';
+import {
+  ArrowBackIcon,
+  GraphIcon,
+  LocationMarkerIcon,
+  OtherProps,
+  PhoneIcon,
+  PlusOutlineIcon,
+  TrashIcon,
+  WebIcon,
+} from './svgsExport';
 
 export type IconName =
-  | 'WebIcon'
   | 'ArrowBackIcon'
   | 'GraphIcon'
   | 'LocationMarkerIcon'
   | 'PhoneIcon'
   | 'PlusOutlineIcon'
-  | 'TrashIcon';
+  | 'TrashIcon'
+  | 'WebIcon';
 
 export enum IconsDataTestIdEnum {
-  'WebIcon' = 'web-icon',
   'ArrowBackIcon' = 'arrow-back-icon',
   'GraphIcon' = 'graph-icon',
   'LocationMarkerIcon' = 'location-marker-icon',
   'PhoneIcon' = 'phone-icon',
   'PlusOutlineIcon' = 'plus-outline-icon',
   'TrashIcon' = 'trash-icon',
+  'WebIcon' = 'web-icon',
 }
-type OtherProps = {
-  onClick: () => void;
-  className: string;
-};
 export const renderIcon = (
   iconName: IconName,
   otherProps?: OtherProps
@@ -40,12 +39,7 @@ export const renderIcon = (
       );
     }
     case 'ArrowBackIcon': {
-      return (
-        <ArrowBackIcon
-          {...otherProps}
-          data-testid={IconsDataTestIdEnum.ArrowBackIcon}
-        />
-      );
+      return <ArrowBackIcon data-testid={IconsDataTestIdEnum.ArrowBackIcon} />;
     }
     case 'GraphIcon': {
       return (
