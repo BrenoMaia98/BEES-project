@@ -3,7 +3,7 @@ import { IconName, renderIcon } from 'assets/icons';
 import InputText from 'components/InputText/InputText';
 import { RemoveableTagDiv, TagDiv } from './styles.BreweryCard';
 
-type TagProps =
+export type InfoTagProps =
   | {
       type?: 'default';
       icon: IconName;
@@ -32,7 +32,7 @@ export const InfoTag = ({
   action,
   icon,
   ...rest
-}: TagProps) => {
+}: InfoTagProps) => {
   const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const [showInput, setShowInput] = useState(false);
 
@@ -84,7 +84,7 @@ export const InfoTag = ({
                 id="new-info"
               />
             ) : (
-              <span>{text || 'no info'}</span>
+              <span data-testid="text-tag-info">{text || 'no info'}</span>
             )}
           </div>
         </TagDiv>
@@ -96,7 +96,7 @@ export const InfoTag = ({
           data-testid={rest['data-testid'] || 'removeable-info-tag'}
         >
           {renderIcon('TrashIcon')}
-          <span>{text || 'no info'}</span>
+          <span data-testid="text-tag-info">{text || 'no info'}</span>
         </RemoveableTagDiv>
       );
     // eslint-disable-next-line default-case-last
@@ -106,7 +106,7 @@ export const InfoTag = ({
         <TagDiv data-testid={rest['data-testid'] || 'info-tag'}>
           <div className={action ? 'hover' : ''}>
             {(icon && renderIcon(icon)) || null}
-            <span>{text || 'no info'}</span>
+            <span data-testid="text-tag-info">{text || 'no info'}</span>
           </div>
         </TagDiv>
       );
