@@ -16,6 +16,15 @@ export type IconName =
   | 'PlusOutlineIcon'
   | 'TrashIcon';
 
+export enum IconsDataTestIdEnum {
+  'WebIcon' = 'web-icon',
+  'ArrowBackIcon' = 'arrow-back-icon',
+  'GraphIcon' = 'graph-icon',
+  'LocationMarkerIcon' = 'location-marker-icon',
+  'PhoneIcon' = 'phone-icon',
+  'PlusOutlineIcon' = 'plus-outline-icon',
+  'TrashIcon' = 'trash-icon',
+}
 type OtherProps = {
   onClick: () => void;
   className: string;
@@ -26,25 +35,57 @@ export const renderIcon = (
 ): JSX.Element | null => {
   switch (iconName) {
     case 'WebIcon': {
-      return <WebIcon {...otherProps} />;
+      return (
+        <WebIcon {...otherProps} data-testid={IconsDataTestIdEnum.WebIcon} />
+      );
     }
     case 'ArrowBackIcon': {
-      return <ArrowBackIcon {...otherProps} />;
+      return (
+        <ArrowBackIcon
+          {...otherProps}
+          data-testid={IconsDataTestIdEnum.ArrowBackIcon}
+        />
+      );
     }
     case 'GraphIcon': {
-      return <GraphIcon {...otherProps} />;
+      return (
+        <GraphIcon
+          {...otherProps}
+          data-testid={IconsDataTestIdEnum.GraphIcon}
+        />
+      );
     }
     case 'LocationMarkerIcon': {
-      return <LocationMarkerIcon {...otherProps} />;
+      return (
+        <LocationMarkerIcon
+          {...otherProps}
+          data-testid={IconsDataTestIdEnum.LocationMarkerIcon}
+        />
+      );
     }
     case 'PhoneIcon': {
-      return <PhoneIcon {...otherProps} />;
+      return (
+        <PhoneIcon
+          {...otherProps}
+          data-testid={IconsDataTestIdEnum.PhoneIcon}
+        />
+      );
     }
     case 'PlusOutlineIcon': {
-      return <PlusOutlineIcon {...otherProps} />;
+      return (
+        <PlusOutlineIcon
+          {...otherProps}
+          data-testid={IconsDataTestIdEnum.PlusOutlineIcon}
+        />
+      );
     }
     case 'TrashIcon': {
-      return <TrashIcon {...otherProps} />;
+      return (
+        <TrashIcon
+          {...otherProps}
+          data-testid={IconsDataTestIdEnum.TrashIcon}
+        />
+      );
     }
     default:
       return null;
