@@ -7,7 +7,6 @@ import {
   PhoneIcon,
   PlusOutlineIcon,
   TrashIcon,
-  WebIcon,
 } from './svgsExport';
 
 export type IconName =
@@ -16,8 +15,7 @@ export type IconName =
   | 'LocationMarkerIcon'
   | 'PhoneIcon'
   | 'PlusOutlineIcon'
-  | 'TrashIcon'
-  | 'WebIcon';
+  | 'TrashIcon';
 
 export enum IconsDataTestIdEnum {
   'ArrowBackIcon' = 'arrow-back-icon',
@@ -26,18 +24,12 @@ export enum IconsDataTestIdEnum {
   'PhoneIcon' = 'phone-icon',
   'PlusOutlineIcon' = 'plus-outline-icon',
   'TrashIcon' = 'trash-icon',
-  'WebIcon' = 'web-icon',
 }
 export const renderIcon = (
   iconName: IconName,
   otherProps?: OtherProps
 ): JSX.Element | null => {
   switch (iconName) {
-    case 'WebIcon': {
-      return (
-        <WebIcon {...otherProps} data-testid={IconsDataTestIdEnum.WebIcon} />
-      );
-    }
     case 'ArrowBackIcon': {
       return <ArrowBackIcon data-testid={IconsDataTestIdEnum.ArrowBackIcon} />;
     }
