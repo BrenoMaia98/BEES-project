@@ -29,8 +29,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "test": "jest --watch",
-    "test-all": "jest --watchAll"
+    "test": "jest",
+    "test-watch": "jest --watchAll"
   },
   "browserslist": {
     "production": [
