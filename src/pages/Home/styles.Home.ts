@@ -28,6 +28,9 @@ export const Logo = styled.img`
 `;
 export const LoginsContainer = styled.div`
   margin-bottom: 10em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   > p {
     margin: 0.75rem 0px;
   }

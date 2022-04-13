@@ -80,6 +80,8 @@ export const InfoTag = ({
                 onKeyDown={handleKeyDown}
                 type="text"
                 autoFocus
+                customMargin="0px 0px 0px .25rem"
+                customMaxWidth="15rem"
                 id="new-info"
               />
             ) : (

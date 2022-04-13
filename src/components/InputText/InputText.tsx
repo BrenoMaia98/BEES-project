@@ -6,6 +6,8 @@ export interface InputTextProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   mask?: 'onlyNumbers' | 'onlyText';
+  customMaxWidth?: string;
+  customMargin?: string;
   customOnChangeMask?: RegExp;
   inputRef?: RefObject<HTMLInputElement>;
   autoFocus?: boolean;
@@ -17,6 +19,8 @@ const InputText: React.FC<InputTextProps> = ({
   onChange,
   autoFocus,
   inputRef,
+  customMargin,
+  customMaxWidth,
   ...rest
 }) => {
   // const inputRef: React.RefObject<HTMLInputElement> = useRef(null);
@@ -67,6 +71,8 @@ const InputText: React.FC<InputTextProps> = ({
       // ref={inputRef}
       ref={inputRef}
       charCount={charCount}
+      customMaxWidth={customMaxWidth}
+      customMargin={customMargin}
       {...rest}
     />
   );

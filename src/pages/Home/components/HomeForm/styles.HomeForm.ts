@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
+  width: 100%;
   .div-checkbox {
     margin-top: 0.5rem;
     display: flex;
@@ -25,6 +26,7 @@ export const Form = styled.form`
     padding: 0.25rem;
     color: ${({ theme }) => theme.font.primaryBg};
   }
+
   input[type='checkbox'] {
     transform: scale(1.25);
     margin-right: 0.5rem;
