@@ -50,7 +50,6 @@ export const SwitchDiv = styled.div`
     transform: translateX(26px);
   }
 
-  /* Rounded sliders */
   .slider.round {
     border-radius: 34px;
   }

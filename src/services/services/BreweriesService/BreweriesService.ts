@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-import axios from 'axios';
 import { api, baseUrl } from 'services/api';
 import {
   AutocompleteItem,
@@ -10,7 +9,6 @@ import {
 class BreweriesService {
   private baseUrl = `${baseUrl}/breweries`;
 
-  // eslint-disable-next-line class-methods-use-this
   ListBreweries() {
     return api.get<BreweryDetailResponseAPI[]>(`${this.baseUrl}`);
   }

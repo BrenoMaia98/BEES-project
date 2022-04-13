@@ -100,9 +100,8 @@ export const InfoTag = ({
           <span data-testid="text-tag-info">{text || 'no info'}</span>
         </RemoveableTagDiv>
       );
-    // eslint-disable-next-line default-case-last
-    default:
     case 'default':
+    default:
       return (
         <TagDiv data-testid={rest['data-testid'] || 'info-tag'}>
           <div className={action ? 'hover' : ''}>

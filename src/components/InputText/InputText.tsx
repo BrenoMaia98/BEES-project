@@ -23,7 +23,6 @@ const InputText: React.FC<InputTextProps> = ({
   customMaxWidth,
   ...rest
 }) => {
-  // const inputRef: React.RefObject<HTMLInputElement> = useRef(null);
   const [charCount, setCharCount] = useState(0);
   useEffect(() => {
     if (autoFocus && inputRef) {
@@ -68,7 +67,6 @@ const InputText: React.FC<InputTextProps> = ({
       data-testid="input-text"
       type="text"
       onChange={handleChangeInput}
-      // ref={inputRef}
       ref={inputRef}
       charCount={charCount}
       customMaxWidth={customMaxWidth}

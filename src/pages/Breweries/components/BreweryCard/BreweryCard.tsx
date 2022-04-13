@@ -1,9 +1,8 @@
-/* eslint-disable camelcase */ // @TO-DO remove this line
 import React from 'react';
 
 import { BreweryDetail } from 'services/services/BreweriesService/type.BreweriesService';
 import { useBreweryContext } from 'pages/Breweries/Context/BreweriesContext';
-import { IconsDataTestIdEnum, renderIcon } from 'assets/icons';
+import { renderIcon } from 'assets/icons';
 import { CardContainer } from './styles.BreweryCard';
 import { InfoTag } from './InfoTag';
 

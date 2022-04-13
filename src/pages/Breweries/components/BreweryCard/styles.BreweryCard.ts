@@ -10,7 +10,6 @@ export const CardContainer = styled.div`
 
   border: 0.05rem solid ${({ theme }) => theme.font.primaryBg};
   background-color: ${({ theme }) => theme.background2};
-  /* color: ${({ theme }) => theme.font.primaryBg}; */
   color: ${({ theme }) => theme.darkTheme && theme.secondary};
 
   .remove-icon {
@@ -37,7 +36,6 @@ export const CardContainer = styled.div`
 
   .tagsList {
     display: flex;
-    /* justify-content: space-between; */
     flex-wrap: wrap;
   }
 `;
@@ -46,7 +44,6 @@ export const TagDiv = styled.div`
   display: flex;
   align-items: center;
 
-  /* width: 8rem; */
   padding: 0.25em 0.75rem;
   margin-top: 0.75em;
   margin-right: 1.5em;

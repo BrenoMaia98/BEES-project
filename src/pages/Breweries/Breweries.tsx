@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-// import { WebIcon } from 'assets/icons';
-
 import { HeaderApp } from 'components/HeaderApp/HeaderApp';
 import { Container, MainContent } from './styles.Breweries';
 import { BreweryCard } from './components/BreweryCard/BreweryCard';
