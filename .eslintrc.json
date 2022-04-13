@@ -1,0 +1,67 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "rules": {
+    "prettier/prettier": "off",
+    "react/jsx-props-no-spreading": "off", //to use ...rest on components props
+    "react/prop-types": "off", // cant HTML default element props as a Type without breaking this rule
+    "react/require-default-props": "off", //same as above
+    "import/no-unresolved": "off", //conflict with CRA absolute import's for this version
+    "prefer-regex-literals": "off", //RegexExp cannot have a break line due prettier without disabling this rule
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
+    "no-use-before-define": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ], //Typescript eslint - Missing file extension "ts" import/extensions
+    "import/prefer-default-export": "off",
+    "react/function-component-definition": "off"
+    // "react/function-component-definition": [
+    //   2,
+    //   {
+    //     "namedComponents": "function-declaration"
+    //   }
+    // ], //Function component is not a function declarationF
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      // "project": "./tsconfig.json",
+      "typescript": {},
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    } //Unable to resolve path to module
+  }
+}
