@@ -1,11 +1,14 @@
 import React from 'react';
-import { render, RenderResult, waitFor } from '@testing-library/react';
+import { render, RenderResult } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { GlobalThemeProvider } from 'global/theme/globalThemeProvider';
 import { BreweriesPage } from 'pages/Breweries/Breweries';
 import { useBreweryContext } from 'pages/Breweries/Context/BreweriesContext';
-import { BreweryStateValue } from 'pages/Breweries/Context/BreweryContextTypes';
 import { BreweryDetail } from 'services/services/BreweriesService/type.BreweriesService';
+import {
+  mockContextDefaultValue,
+  mockDefaultValues,
+} from '__mock__/breweriesContextMocks';
 
 const mockListBreweries = jest.fn();
 
@@ -39,29 +42,12 @@ const mockBreweryDetails: BreweryDetail = {
   moreInfo: [],
 };
 
-const defaultValues: BreweryStateValue = {
-  searchString: '',
-  breweriesList: [],
-  breweriesDetail: null,
-  autocompleteSuggestion: [],
-};
-
-export const contextDefaultValue = {
-  state: defaultValues,
-  listBreweries: mockListBreweries,
-  getBreweryById: jest.fn(),
-  searchBreweriesByName: jest.fn(),
-  getSearchSuggestionList: jest.fn(),
-  deleteBreweryById: jest.fn(),
-  addMoreInfo: jest.fn(),
-  removeInfoByIndex: jest.fn(),
-};
-
 describe('Breweries Page', () => {
   it('Should list breweries on load', async () => {
-    (useBreweryContext as jest.Mock).mockImplementation(
-      () => contextDefaultValue
-    );
+    (useBreweryContext as jest.Mock).mockImplementation(() => ({
+      ...mockContextDefaultValue,
+      listBreweries: mockListBreweries,
+    }));
 
     renderComponent();
 
@@ -70,9 +56,9 @@ describe('Breweries Page', () => {
 
   it('Should display breweries list correctly', async () => {
     (useBreweryContext as jest.Mock).mockImplementation(() => ({
-      ...contextDefaultValue,
+      ...mockContextDefaultValue,
       state: {
-        ...defaultValues,
+        ...mockDefaultValues,
         breweriesList: Array(5)
           .fill(null)
           .map((_, index) => ({

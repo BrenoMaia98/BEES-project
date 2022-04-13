@@ -34,8 +34,6 @@ const InputText: React.FC<InputTextProps> = ({
   const handleChangeInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     let newValue = e.target.value;
     if (mask) {
-      // eslint-disable-next-line no-debugger
-      debugger;
       switch (mask) {
         case 'onlyNumbers': {
           // prevent user to type non-alphabetical values

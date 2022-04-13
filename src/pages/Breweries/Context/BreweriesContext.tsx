@@ -17,19 +17,9 @@ const defaultValues: BreweryStateValue = {
   autocompleteSuggestion: [],
 };
 
-export const contextDefaultValue = {
-  state: defaultValues,
-  listBreweries: async () => {},
-  getBreweryById: async () => {},
-  searchBreweriesByName: async () => {},
-  getSearchSuggestionList: async () => {},
-  deleteBreweryById: () => {},
-  addMoreInfo: () => {},
-  removeInfoByIndex: () => {},
-};
-
-const MyBreweryContext =
-  React.createContext<ContextDefaultValue>(contextDefaultValue);
+const MyBreweryContext = React.createContext<ContextDefaultValue>(
+  {} as ContextDefaultValue
+);
 
 const breweriesReducer = (
   state: BreweryStateValue,
@@ -37,31 +27,12 @@ const breweriesReducer = (
 ): BreweryStateValue => {
   const { payload, type } = action;
   switch (type) {
-    case 'SET_AUTOCOMPLETE_SUGGESTION':
-      return {
-        ...state,
-        autocompleteSuggestion: payload || state.autocompleteSuggestion,
-      };
-    case 'SET_BREWERIES_DETAIL':
-      return {
-        ...state,
-        breweriesDetail: payload || state.breweriesDetail,
-      };
     case 'SET_BREWERIES_LIST':
       return {
         ...state,
         breweriesList: payload || state.breweriesList,
       };
-    case 'CONCAT_BREWERIES_LIST':
-      return {
-        ...state,
-        breweriesList: [...state.breweriesList, ...(payload || [])],
-      };
-    case 'SET_SEARCH_VALUE':
-      return {
-        ...state,
-        searchString: payload || state.searchString,
-      };
+
     case 'REMOVE_BREWERY_BY_ID':
       return {
         ...state,
@@ -106,45 +77,11 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
   const service = new BreweriesService();
   const [state, dispatch] = useReducer(breweriesReducer, defaultValues);
 
-  useEffect(() => {
-    if (state.searchString) {
-      service.SearchBreweries(state.searchString).then((resp) => {
-        dispatch({
-          type: BreweryActionType.SET_BREWERIES_LIST,
-          payload: resp.data.map((item) => mapBreweryDetailResponseAPI(item)),
-        });
-      });
-    }
-  }, [state.searchString]);
-
   const listBreweries = async () => {
     const resp = await service.ListBreweries();
     dispatch({
       type: BreweryActionType.SET_BREWERIES_LIST,
       payload: resp.data.map((item) => mapBreweryDetailResponseAPI(item)),
-    });
-  };
-
-  const getBreweryById = async (breweryId: string | number) => {
-    const resp = await service.GetBrewery(breweryId);
-    dispatch({
-      type: BreweryActionType.SET_BREWERIES_DETAIL,
-      payload: mapBreweryDetailResponseAPI(resp.data),
-    });
-  };
-
-  const searchBreweriesByName = async (searchString: string) => {
-    dispatch({
-      type: BreweryActionType.SET_SEARCH_VALUE,
-      payload: searchString,
-    });
-  };
-
-  const getSearchSuggestionList = async (searchString: string) => {
-    const resp = await service.Autocomplete(searchString);
-    dispatch({
-      type: BreweryActionType.SET_AUTOCOMPLETE_SUGGESTION,
-      payload: resp.data,
     });
   };
 
@@ -184,9 +121,6 @@ export const BreweryContextProvider: React.FC = ({ children }) => {
     () => ({
       state,
       listBreweries,
-      getBreweryById,
-      searchBreweriesByName,
-      getSearchSuggestionList,
       deleteBreweryById,
       addMoreInfo,
       removeInfoByIndex,
