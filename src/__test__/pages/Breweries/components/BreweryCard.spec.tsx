@@ -5,6 +5,14 @@ import { BreweryCard } from 'pages/Breweries/components/BreweryCard/BreweryCard'
 import { IconsDataTestIdEnum } from 'assets/icons';
 import { mockBreweryDetails } from '__mock__/breweriesMockObjs';
 import '@testing-library/jest-dom/extend-expect';
+import { useBreweryContext } from 'pages/Breweries/Context/BreweriesContext';
+import { mockContextDefaultValue } from '__mock__/breweriesContextMocks';
+
+const mockDeleteBreweryById = jest.fn();
+jest.mock('pages/Breweries/Context/BreweriesContext', () => ({
+  ...jest.requireActual('pages/Breweries/Context/BreweriesContext'),
+  useBreweryContext: jest.fn(),
+}));
 
 const renderComponent = (): RenderResult => {
   return render(
@@ -25,6 +33,13 @@ const testIds = {
 };
 
 describe('HeaderApp', () => {
+  beforeEach(() => {
+    (useBreweryContext as jest.Mock).mockImplementation(() => ({
+      ...mockContextDefaultValue,
+      deleteBreweryById: mockDeleteBreweryById,
+    }));
+  });
+
   describe('Should display', () => {
     it.each`
       componentName         | testId
@@ -44,10 +59,19 @@ describe('HeaderApp', () => {
     });
   });
   it('Remove icon should have an onclick function', () => {
-    const { queryByTestId, debug } = renderComponent();
+    const { queryByTestId } = renderComponent();
 
     const icon = queryByTestId(testIds.removeIcon);
 
     expect(icon?.onclick).toBeDefined();
+  });
+
+  it('Should call remove function from context from TrashIcon', () => {
+    const { getByTestId } = renderComponent();
+
+    const icon = getByTestId(testIds.removeIcon);
+
+    fireEvent.click(icon);
+    expect(mockDeleteBreweryById).toHaveBeenCalledTimes(1);
   });
 });
